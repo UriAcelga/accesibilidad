@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('carreras', function(Blueprint $tabla) {
             $tabla->id();
-            $tabla->foreignId('facultad_id')
+            $tabla->foreignId('facultad_codigo')
             ->constrained()
             ->onDelete('restrict')
             ->onUpdate('cascade');

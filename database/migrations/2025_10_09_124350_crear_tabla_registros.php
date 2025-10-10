@@ -15,9 +15,6 @@ return new class extends Migration
             $tabla->id();
             $tabla->string('apellido');
             $tabla->string('nombre');
-            $tabla->integer('facultad');
-            $tabla->integer('departamento');
-            $tabla->integer('carrera');
             $tabla->string('email');
             $tabla->unsignedBigInteger('telefono');
             $tabla->timestamps();
@@ -26,7 +23,7 @@ return new class extends Migration
             ->constrained()
             ->onDelete('set null')
             ->onUpdate('cascade');
-            $tabla->string('cud', 15); //usar strtoupper
+            $tabla->integer('cud'); //limitar a 10 caracteres en el modelo
             $tabla->string('apoyos', 4000);
             $tabla->string('situacion', 4000);
             $tabla->string('descripcion', 4000);

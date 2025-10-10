@@ -11,13 +11,11 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('departamentos', function(Blueprint $tabla) {
-            $tabla->id();
-            $tabla->foreignId('facultad_codigo')
+        Schema::table('registros', function(Blueprint $tabla) {
+            $tabla->foreignId('departamento_id')
             ->constrained()
-            ->onDelete('restrict')
-            ->onUpdate('cascade');
-            $tabla->string('nombre');
+            ->onUpdate('cascade')
+            ->onDelete('cascade');
         });
     }
 
@@ -26,6 +24,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('departamentos');
+        Schema::table('registros', function(Blueprint $tabla) {
+            $tabla->drop('departamento_id');
+        });
     }
 };
