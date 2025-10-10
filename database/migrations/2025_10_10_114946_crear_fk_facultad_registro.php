@@ -12,10 +12,12 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('registros', function(Blueprint $tabla) {
-            $tabla->foreignId('facultad_codigo')
-            ->constrained()
-            ->onUpdate('cascade')
-            ->onDelete('cascade');
+            $tabla->string('facultad_codigo', 6);
+            $tabla->foreign('facultad_codigo')
+            ->references('codigo')
+            ->on('facultades')
+            ->onDelete('restrict')
+            ->onUpdate('cascade');
         });
     }
 

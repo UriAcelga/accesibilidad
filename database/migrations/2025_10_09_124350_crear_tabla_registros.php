@@ -18,17 +18,20 @@ return new class extends Migration
             $tabla->string('email');
             $tabla->unsignedBigInteger('telefono');
             $tabla->timestamps();
-            $tabla->foreignId('entrevistador_id')
-            ->nullable()
-            ->constrained()
-            ->onDelete('set null')
-            ->onUpdate('cascade');
             $tabla->integer('cud'); //limitar a 10 caracteres en el modelo
             $tabla->string('apoyos', 4000);
             $tabla->string('situacion', 4000);
             $tabla->string('descripcion', 4000);
             $tabla->string('ficha_academica'); //se guarda el nombre de archivo con extensión docx
             
+            /*Agregar entrevistador (usuario no creado)
+            
+            $tabla->foreignId('entrevistador_id')
+            ->nullable()
+            ->constrained()
+            ->onDelete('set null')
+            ->onUpdate('cascade');
+             */
         });
     }
 

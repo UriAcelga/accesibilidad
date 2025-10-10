@@ -13,8 +13,10 @@ return new class extends Migration
     {
         Schema::create('departamentos', function(Blueprint $tabla) {
             $tabla->id();
-            $tabla->foreignId('facultad_codigo')
-            ->constrained()
+            $tabla->string('facultad_codigo', 6);
+            $tabla->foreign('facultad_codigo')
+            ->references('codigo')
+            ->on('facultades')
             ->onDelete('restrict')
             ->onUpdate('cascade');
             $tabla->string('nombre');
