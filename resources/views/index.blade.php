@@ -7,15 +7,19 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Document</title>
     @vite('resources/css/app.css')
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.15.0/dist/cdn.min.js"></script>
 </head>
 
 <body class="w-screen h-screen bg-green-100">
 
 
-    <form class="max-w-sm mx-auto">
+    <form class="max-w-lg mx-auto">
+        <div class="mb-5">
+            <x-select-con-tags :tabindex="0" :facultades="$facultades"></x-select-con-tags>
+        </div>
         <div class="mb-5">
             <label for="email" class="block mb-2 text-sm font-medium text-gray-900 ">Your email</label>
-            <input type="email" id="email" tabindex="1"
+            <input type="email" id="email" tabindex="0"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
 
                 transition duration-300 ease-in-out 
@@ -25,16 +29,13 @@
         </div>
         <div class="mb-5">
             <label for="password" class="block mb-2 text-sm font-medium text-gray-900 ">Your password</label>
-            <input type="password" id="password" tabindex="2"
+            <input type="password" id="password" tabindex="0"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
                 required />
         </div>
-        <button type="submit" tabindex="3"
+        <button type="submit" tabindex="0"
             class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
     </form>
-<script>
-    /*Añadir un evento al ultimo elemento tabulable para que al terminar las tabulaciones se vuelva al primer elemento*/
-</script>
 </body>
 
 </html>
