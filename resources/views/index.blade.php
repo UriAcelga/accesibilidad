@@ -15,7 +15,10 @@
 
     <form class="max-w-lg mx-auto">
         <div class="mb-5">
-            <x-select-con-tags :tabindex="0" :facultades="$facultades"></x-select-con-tags>
+            <x-dropdown-badges
+                :facultades="$facultades"
+                prompt="Selecciona una facultad"
+                field_name="facultad"></x-dropdown-badges>
         </div>
         <div class="mb-5">
             <label for="email" class="block mb-2 text-sm font-medium text-gray-900 ">Your email</label>
