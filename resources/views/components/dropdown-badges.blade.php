@@ -3,6 +3,7 @@
     <div x-data="{
         open: false,
         focused_index: 0,
+        input_value: '',
         max_index: {{ $facultades->count() - 1 }},
         select_prompt: '{{ $prompt }}',
     
@@ -51,12 +52,16 @@
                 }
             }
         }
-    }" x-on:keydown.stop="navigate($event)" x-id="['dropdown-panel']" class="relative w-full">
-        <!-- Hidden Input: Dispatch manda datos en el evento para que otros componentes lo reconozcan -->
+    }"  x-on:keydown.stop="navigate($event)"
+        x-id="['dropdown-panel']"
+        class="relative w-full"
+        x-effect="$dispatch('facultad-change', input_value)"
+        >
+        <!-- Hidden Input -->
         <input type="hidden"
             name="{{ $field_name }}"
             x-bind:value="input_value"
-            x-effect="$dispatch('input-change', {field: $el.name, value: $el.value})">
+            >
         <!-- Boton -->
         <span class="block mb-2 text-sm font-medium text-gray-900">Facultad</span>
         <button type="button" tabindex=0 
@@ -87,7 +92,7 @@
                     data-index="{{ $loop->index }}"
                     data-value="{{ $facultad->codigo }}"
                     data-name="{{ $facultad->nombre }}"
-                    x-on:click.prevent="selectOption('{{ $facultad->codigo }}','{{ $facultad->nombre }}')"
+                    x-on:click.prevent="selectOption($el.dataset.value, $el.dataset.name)"
                     class="p-2.5 w-full flex items-center rounded-md transition-colors text-left text-gray-800 hover:bg-blue-100 focus-visible:bg-blue-100 disabled:opacity-50 disabled:cursor-not-allowed border-b border-gray-200"
                     :class="$el.dataset.index == focused_index ? 'ring-3 ring-blue-700' : ''">
                     <span

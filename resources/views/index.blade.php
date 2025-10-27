@@ -21,6 +21,12 @@
                 field_name="facultad"></x-dropdown-badges>
         </div>
         <div class="mb-5">
+            <x-dropdown-interno
+                :facultades="$facultades"
+                prompt="Selecciona una carrera"
+                field_name="carrera"></x-dropdown-interno>
+        </div>
+        <div class="mb-5">
             <label for="email" class="block mb-2 text-sm font-medium text-gray-900 ">Your email</label>
             <input type="email" id="email" tabindex="0"
                 class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
