@@ -10,41 +10,62 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.15.0/dist/cdn.min.js"></script>
 </head>
 
-<body class="w-screen h-screen bg-green-100">
+<body class="w-screen h-screen bg-verde-azulado">
 
+    <div class=" lg-w-40% mx-auto">
+        <form class="max-w-lg mx-auto">
+            <div class="mb-5">
+                <x-dropdown-badges
+                    :facultades="$facultades"
+                    prompt="Selecciona una facultad"
+                    field_name="facultad"></x-dropdown-badges>
+            </div>
+            <div class="flex flex-row">
 
-    <form class="max-w-lg mx-auto">
-        <div class="mb-5">
-            <x-dropdown-badges
-                :facultades="$facultades"
-                prompt="Selecciona una facultad"
-                field_name="facultad"></x-dropdown-badges>
-        </div>
-        <div class="mb-5">
-            <x-dropdown-interno
-                :facultades="$facultades"
-                prompt="Selecciona una carrera"
-                field_name="carrera"></x-dropdown-interno>
-        </div>
-        <div class="mb-5">
-            <label for="email" class="block mb-2 text-sm font-medium text-gray-900 ">Your email</label>
-            <input type="email" id="email" tabindex="0"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg
-
-                transition duration-300 ease-in-out 
-                focus:ring-3 focus:ring-green-500/75 focus:border-green-500
-                block w-full p-2.5"
-                placeholder="marijo" required />
-        </div>
-        <div class="mb-5">
-            <label for="password" class="block mb-2 text-sm font-medium text-gray-900 ">Your password</label>
-            <input type="password" id="password" tabindex="0"
-                class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                required />
-        </div>
-        <button type="submit" tabindex="0"
-            class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm w-full sm:w-auto px-5 py-2.5 text-center">Submit</button>
-    </form>
+                <div class="mb-5 w-1/2">
+                <x-dropdown-interno
+                        :facultades="$facultades"
+                        prompt="Selecciona una carrera"
+                        field_name="carrera"></x-dropdown-interno>
+                    </div>
+                <div class="mb-5 w-1/2">
+                    <x-dropdown-interno
+                        :facultades="$facultades"
+                        prompt="Selecciona un departamento"
+                        field_name="departamento"
+                        elements="departamentos"></x-dropdown-interno>
+                </div>
+            </div>
+            <div class="mb-5">
+                <label for="email" class="block mb-2 text-lg font-medium text-white ">Correo Electrónico:</label>
+                <input type="email" id="email" tabindex="0"
+                    class="bg-gray-50 border-2 border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5"
+                    placeholder="tu_email@ejemplo.com" required />
+            </div>
+            <div class="mb-5">
+                <label for="tel" class="block mb-2 text-lg font-medium text-white ">Nro. Telefónico:</label>
+                <input type="tel" id="tel" tabindex="0"
+                    class="bg-gray-50 border-2 border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5"
+                    required inputmode="numeric" maxlength="12"/>
+            </div>
+            <div class="mb-5">
+                <label for="cud" class="block mb-2 text-lg font-medium text-white ">CUD:</label>
+                <input type="number" id="cud" tabindex="0"
+                    class="bg-gray-50 border-2 border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5"
+                    required inputmode="numeric" maxlength="10"/>
+            </div>
+            <div class="mb-5">
+                <label for="cud" class="block mb-2 text-lg font-medium text-white ">CUD:</label>
+                <input type="tel" id="cud" tabindex="0"
+                    class="bg-gray-50 border-2 border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5"
+                    required inputmode="numeric" maxlength="12"/>
+            </div>
+            <div class="mb-5 flex justify-center">
+                <button type="submit" tabindex="0"
+                    class="text-white bg-coral hover:bg-coral-oscuro focus:ring-4 focus:outline-none focus:ring-blue-900 font-medium rounded-lg text-md w-5/6 sm:w-auto px-5 py-2.5 text-center">Submit</button>
+            </div>  
+        </form>
+    </div>
 </body>
 
 </html>

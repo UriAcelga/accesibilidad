@@ -172,10 +172,6 @@ class DatabaseSeeder extends Seeder
                 'facultad_codigo' => 'FTU',
                 'nombre' => 'Aromáticas y Jardinería',
             ],
-            [
-                'facultad_codigo' => 'IPAU',
-                'nombre' => '-',
-            ],
         ]);
 
         /**

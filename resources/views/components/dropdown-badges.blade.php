@@ -15,7 +15,7 @@
         toggle() {
             if (this.open) {
                 this.close()
-            } else {
+            } else if(! this.$refs.button.ariaDisabled)  {
                 this.open = true
                 this.focused_index = 0
             }
@@ -46,7 +46,7 @@
                     this.selectOption(this.$refs.listbox.children[this.focused_index].dataset.value,
                         this.$refs.listbox.children[this.focused_index].dataset.name )    
                 }
-            } else {
+            } else{
                 if (event.key === 'ArrowDown' || event.key === 'ArrowUp' ) {
                     this.toggle()
                 }
@@ -63,15 +63,15 @@
             x-bind:value="input_value"
             >
         <!-- Boton -->
-        <span class="block mb-2 text-sm font-medium text-gray-900">Facultad</span>
+        <span class="block mb-2 text-lg font-medium text-white">{{ucfirst($field_name)}}:</span>
         <button type="button" tabindex=0 
             x-ref="button"
             x-on:click="toggle()" 
             :aria-expanded="open"
             :aria-controls="$id('dropdown-panel')" aria-haspopup="listbox"
-            class="relative flex items-center whitespace-nowrap justify-between gap-2 w-full h-12 px-4 py-3 text-base text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+            class="relative flex items-center whitespace-nowrap justify-between gap-2 w-full h-12 px-4 py-3 text-base text-gray-900 border-2 border-gray-400 rounded-lg bg-gray-50 focus:ring-blue-900 focus:border-blue-900"
             >
-            <span x-text="select_prompt"></span>
+            <span x-text="select_prompt" class="truncate"></span>
 
             <img src="{{ asset('icons/dropdown-arrow.svg') }}" class="w-4">
 

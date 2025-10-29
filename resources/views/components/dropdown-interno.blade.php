@@ -1,4 +1,8 @@
-@props(['facultades', 'prompt', 'field_name'])
+@props(['facultades',
+    'prompt' => 'Selecciona una carrera', 
+    'field_name' => 'carrera',
+    'elements' => 'carreras'
+])
 <div class="flex justify-center">
     <div x-data="{
         open: false,
@@ -6,7 +10,7 @@
         input_value: '',
         max_index: {{ $facultades->count() - 1 }},
         select_prompt: '{{ $prompt }}',
-        visible_indexes: [0,0,0,0],
+        visible_indexes: [],
 
         facultad: 'none',
     
@@ -18,9 +22,9 @@
         toggle() {
             if (this.open) {
                 this.close()
-            } else {
+            } else if(! this.$refs.button.ariaDisabled) {
                 this.open = true
-                this.focused_index = 0
+                this.focused_index = this.visible_indexes[0] ?? 1
             }
         },
     
@@ -53,6 +57,7 @@
                     const i = this.visible_indexes.indexOf(this.focused_index)
                     if(i === 0) {
                         this.focused_index = this.visible_indexes[this.visible_indexes.length - 1]
+                        this.scrollToLast()
                     } else {
                         this.focused_index = this.visible_indexes[i-1]
                     }
@@ -60,14 +65,16 @@
                     this.focused_index = this.visible_indexes[0]
                 } else if (event.key === 'End') {
                     this.focused_index = this.visible_indexes[this.visible_indexes.length - 1]
+                    this.scrollToLast()
                 } else if (event.key === 'Tab') {
                     this.open = false
                 } else if (event.key === 'Escape') {
                     this.close()
                 } else if (event.key === 'Enter' || event.key === ' ') {
                     event.preventDefault()
-                    this.selectOptionByIndex(this.focused_index)    
+                    this.selectOptionByIndex(this.focused_index)  
                 }
+                this.scrollToFocused()
             } else {
                 if (event.key === 'ArrowDown' || event.key === 'ArrowUp' ) {
                     this.toggle()
@@ -90,6 +97,21 @@
             this.facultad = $event.detail
             this.visible_indexes = this.getVisibleItemIndexes()
         },
+        
+        isDisabled() {
+            return this.visible_indexes.length === 0
+        },
+
+        scrollToFocused() {
+            this.$refs.listbox.children[this.focused_index].scrollIntoView({
+                block: 'center',
+                inline: 'nearest'
+            })
+        },
+
+        scrollToLast() {
+            this.$refs.listbox.scrollTop = this.$refs.listbox.scrollHeight
+        },
     }"
     @facultad-change.window="cambiarFacultad($event)"
     x-on:keydown.stop="navigate($event)" x-id="['dropdown-panel']" class="relative w-full">
@@ -98,15 +120,17 @@
             name="{{ $field_name }}"
             x-bind:value="input_value">
         <!-- Boton -->
-        <span class="block mb-2 text-sm font-medium text-gray-900">Carrera</span>
+        <span class="block mb-2 text-lg font-medium text-white">{{ucfirst($field_name)}}:</span>
         <button type="button" tabindex=0 
             x-ref="button"
             x-on:click="toggle()" 
             :aria-expanded="open"
             :aria-controls="$id('dropdown-panel')" aria-haspopup="listbox"
-            class="relative flex items-center whitespace-nowrap justify-between gap-2 w-full h-12 px-4 py-3 text-base text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+            :aria-disabled="isDisabled()"
+            class="relative flex items-center whitespace-nowrap justify-between gap-2 w-full h-12 px-4 py-3 text-base border-2 border-gray-400 rounded-lg focus:ring-blue-900 focus:border-blue-900"
+            :class="isDisabled() ? 'bg-gray-300 text-gray-600' : 'bg-gray-50 text-gray-900'"
             >
-            <span x-text="select_prompt"></span>
+            <span x-text="select_prompt" class="truncate"></span>
 
             <img src="{{ asset('icons/dropdown-arrow.svg') }}" class="w-4">
 
@@ -120,13 +144,16 @@
             x-on:click.outside="close()"
             :id="$id('dropdown-panel')"
 
-            class="absolute left-0 w-full rounded-lg shadow-sm mt-2 z-10 origin-top-left bg-white outline-none border border-gray-200">
+            class="absolute left-0 w-full rounded-lg shadow-sm mt-2 z-10 p-2 origin-top-left bg-white outline-none border border-gray-200 max-h-72 overflow-y-scroll">
             <!-- Opciones -->
+            @php
+                $loopCount = 0;
+            @endphp
             @for ($i = 0; $i < $facultades->count(); $i++)
-                @for ($j = 0; $j < $facultades[$i]->carreras->count(); $j++)
+                @for ($j = 0; $j < $facultades[$i]->{$elements}->count(); $j++)
                     @php
-                        $item = $facultades[$i]->carreras[$j];
-                        $loopCount = ($i + 1) * $facultades->count() + ($j + 1);
+                        $item = $facultades[$i]->{$elements}[$j];
+                        $loopCount++;
                     @endphp
                     <li role="option"
                     data-index="{{ $loopCount }}"
