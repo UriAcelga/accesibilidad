@@ -155,11 +155,11 @@ class WordService {
     }
 
     /**
-     * Nueva actualización al archivo
+     * Actualiza el archivo. Retorna bool dependiendo si la ficha está cerrada.
      */
     public function actualizarFicha(string $ruta, string $actualizacion, string $empleado){
         if($this->esFichaCerrada()) {
-            return;
+            return false;
         }
         $this->phpWord = \PhpOffice\PhpWord\IOFactory::load($ruta);
         $section = $this->phpWord->getSection(0);
@@ -194,10 +194,11 @@ class WordService {
             $this->fontstyle_text
         );
         $section->addTextBreak(3);
+        return true;
     }
 
     /**
-     * Última actualización al archivo (debería actualizar metadatos)
+     * Última actualización al archivo. Retorna bool dependiendo si la ficha está cerrada.
      */
     public function cerrarFicha(string $ruta, string $causa){
         if($this->esFichaCerrada()) {
@@ -235,7 +236,7 @@ class WordService {
         $objWriter->save($ruta);
     }
 
-    public function esFichaCerrada() {
+    private function esFichaCerrada() {
         return $this->phpWord->getDocInfo()->getSubject() == $this->ASUNTO_CERRADO;
     }
 
