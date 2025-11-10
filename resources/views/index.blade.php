@@ -11,24 +11,43 @@
 </head>
 
 <body class="w-screen h-screen bg-verde-azulado">
-
-    <div class=" lg-w-40% mx-auto">
-        <form class="max-w-lg mx-auto">
+    <div class="w-full bg-white">
+        <!-- ajustar los 3 elementos izq - centro - der -->
+        <nav class="flex flex-col md:flex-row justify-between border-b-2 border-coral items-center">
+            <img src="{{asset('logo.png')}}" class="w-1/5" alt="logo">
+            <h2 class="font-bold text-center text-3xl text-coral w-full ">Solicitud de acompañamiento</h2>
+            <span class="font-bold text-center text-3xl text-coral w-full">Lucía</span>
+        </nav>
+    </div>
+    <div class=" lg-w-40% mx-auto mt-8">
+        <form class="w-2/3 mx-auto">
+            <div class="mb-5">
+                <label for="apellido" class="block mb-2 text-lg font-medium text-white ">Apellido:</label>
+                <input type="text" id="apellido" tabindex="0"
+                    class="bg-gray-50 border-2 border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5"
+                    placeholder="Apellido" maxlength="15"/>
+            </div>
+            <div class="mb-5">
+                <label for="nombre" class="block mb-2 text-lg font-medium text-white ">Nombre:</label>
+                <input type="text" id="nombre" tabindex="0"
+                    class="bg-gray-50 border-2 border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5"
+                    placeholder="Nombre" maxlength="30"/>
+            </div>
             <div class="mb-5">
                 <x-dropdown-badges
                     :facultades="$facultades"
                     prompt="Selecciona una facultad"
                     field_name="facultad"></x-dropdown-badges>
             </div>
-            <div class="flex flex-row">
+            <div class="flex flex-col md:flex-row md:gap-x-4">
 
-                <div class="mb-5 w-1/2">
+                <div class="mb-5 md:flex-1 min-w-0">
                 <x-dropdown-interno
                         :facultades="$facultades"
                         prompt="Selecciona una carrera"
                         field_name="carrera"></x-dropdown-interno>
                     </div>
-                <div class="mb-5 w-1/2">
+                <div class="mb-5 md:flex-1 min-w-0">
                     <x-dropdown-interno
                         :facultades="$facultades"
                         prompt="Selecciona un departamento"
@@ -55,14 +74,26 @@
                     required inputmode="numeric" maxlength="10"/>
             </div>
             <div class="mb-5">
-                <label for="cud" class="block mb-2 text-lg font-medium text-white ">CUD:</label>
-                <input type="tel" id="cud" tabindex="0"
-                    class="bg-gray-50 border-2 border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5"
-                    required inputmode="numeric" maxlength="12"/>
+                <label for="apoyo" class="block mb-2 text-lg font-medium text-white ">Apoyo (opcional):</label>
+                <textarea id="apoyo" tabindex="0"
+                    class="bg-gray-50 border-2 border-gray-400 font-source-code-pro text-gray-900 text-sm rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5"
+                    maxlength="4000" rows="5"></textarea>
+            </div>
+            <div class="mb-5">
+                <label for="situacion" class="block mb-2 text-lg font-medium text-white ">Situación (opcional):</label>
+                <textarea id="situacion" tabindex="0"
+                class="bg-gray-50 border-2 border-gray-400 font-source-code-pro text-gray-900 text-sm rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5"
+                maxlength="4000" rows="5"></textarea>
+            </div>
+            <div class="mb-5">
+                <label for="descripcion" class="block mb-2 text-lg font-medium text-white ">Descripción (opcional):</label>
+                <textarea id="descripcion" tabindex="0"
+                    class="bg-gray-50 border-2 border-gray-400 font-source-code-pro text-gray-900 text-sm rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5"
+                    maxlength="4000" rows="5"></textarea>
             </div>
             <div class="mb-5 flex justify-center">
                 <button type="submit" tabindex="0"
-                    class="text-white bg-coral hover:bg-coral-oscuro focus:ring-4 focus:outline-none focus:ring-blue-900 font-medium rounded-lg text-md w-5/6 sm:w-auto px-5 py-2.5 text-center">Submit</button>
+                    class="text-white bg-coral hover:bg-coral-oscuro focus:ring-4 focus:outline-none focus:ring-blue-900 font-medium rounded-lg text-md w-5/6 sm:w-auto px-5 py-2.5 text-center">Inscribir alumno</button>
             </div>  
         </form>
     </div>

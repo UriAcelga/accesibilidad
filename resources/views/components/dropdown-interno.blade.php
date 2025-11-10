@@ -9,6 +9,7 @@
         focused_index: 0,
         input_value: '',
         max_index: {{ $facultades->count() - 1 }},
+        default_prompt: '{{ $prompt }}',
         select_prompt: '{{ $prompt }}',
         visible_indexes: [],
 
@@ -46,6 +47,7 @@
     
         navigate(event) {
             if (this.open) {
+                event.preventDefault()
                 if (event.key === 'ArrowDown') {
                     const i = this.visible_indexes.indexOf(this.focused_index)
                     if(i === this.visible_indexes.length - 1) {
@@ -96,6 +98,8 @@
         cambiarFacultad($event) {
             this.facultad = $event.detail
             this.visible_indexes = this.getVisibleItemIndexes()
+            this.select_prompt = this.default_prompt
+            this.input_value = ''
         },
         
         isDisabled() {

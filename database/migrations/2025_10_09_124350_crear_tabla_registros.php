@@ -19,10 +19,7 @@ return new class extends Migration
             $tabla->unsignedBigInteger('telefono');
             $tabla->timestamps();
             $tabla->integer('cud'); //limitar a 10 caracteres en el modelo
-            $tabla->string('apoyos', 4000);
-            $tabla->string('situacion', 4000);
-            $tabla->string('descripcion', 4000);
-            $tabla->string('ficha_academica'); //se guarda el nombre de archivo con extensión docx
+            $tabla->string('ficha_academica'); //se guarda un hash al archivo con extensión docx
             
             /*Agregar entrevistador (usuario no creado)
             

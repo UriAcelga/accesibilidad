@@ -29,6 +29,7 @@
     
         navigate(event) {
             if (this.open) {
+                event.preventDefault()
                 if (event.key === 'ArrowDown') {
                     this.focused_index = this.focused_index < this.max_index ? this.focused_index + 1 : 0
                 } else if (event.key === 'ArrowUp') {
