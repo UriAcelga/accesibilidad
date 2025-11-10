@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Universidad y Discapacidad</title>
     @vite('resources/css/app.css')
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.15.0/dist/cdn.min.js"></script>
 </head>
@@ -21,6 +21,7 @@
     </div>
     <div class=" lg-w-40% mx-auto mt-8">
         <form class="w-2/3 mx-auto">
+        @csrf
             <div class="mb-5">
                 <label for="apellido" class="block mb-2 text-lg font-medium text-white ">Apellido:</label>
                 <input type="text" id="apellido" tabindex="0"
