@@ -17,13 +17,17 @@ class HomeController extends Controller
     }
 
     public function index() {
+        return view('index');
+    }
+
+    public function solicitudes() {
         $data = $this->facultadService->fetch();
 
         /*$ruta = Storage::disk('local')->path('seguimientos') . '/' . 'gomez_uriel_fernando_1111111111_2025-11-06_14-26-01.docx';
         $word = new WordService();
         $word->cerrarFicha($ruta, 'rehabilitación terminada, ya no requiere asistencia ni monitoreo.');
         dd(WordService::getDocMetadata($ruta));*/
-        return view('index', [
+        return view('solicitud', [
             'facultades' => $data
         ]);
     }

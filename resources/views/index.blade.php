@@ -1,103 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Universidad y Discapacidad</title>
+    <title>Iniciar Sesión</title>
     @vite('resources/css/app.css')
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.15.0/dist/cdn.min.js"></script>
 </head>
-
-<body class="w-screen h-screen bg-verde-azulado">
-    <div class="w-full bg-white">
-        <!-- ajustar los 3 elementos izq - centro - der -->
-        <nav class="flex flex-col md:flex-row justify-between border-b-2 border-coral items-center">
-            <img src="{{asset('logo.png')}}" class="w-1/5" alt="logo">
-            <h2 class="font-bold text-center text-3xl text-coral w-full ">Solicitud de acompañamiento</h2>
-            <span class="font-bold text-center text-3xl text-coral w-full">Lucía</span>
-        </nav>
-    </div>
-    <div class=" lg-w-40% mx-auto mt-8">
-        <form class="w-2/3 mx-auto">
-        @csrf
-            <div class="mb-5">
-                <label for="apellido" class="block mb-2 text-lg font-medium text-white ">Apellido:</label>
-                <input type="text" id="apellido" tabindex="0"
-                    class="bg-gray-50 border-2 border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5"
-                    placeholder="Apellido" maxlength="15"/>
-            </div>
-            <div class="mb-5">
-                <label for="nombre" class="block mb-2 text-lg font-medium text-white ">Nombre:</label>
-                <input type="text" id="nombre" tabindex="0"
-                    class="bg-gray-50 border-2 border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5"
-                    placeholder="Nombre" maxlength="30"/>
-            </div>
-            <div class="mb-5">
-                <x-dropdown-badges
-                    :facultades="$facultades"
-                    prompt="Selecciona una facultad"
-                    field_name="facultad"></x-dropdown-badges>
-            </div>
-            <div class="flex flex-col md:flex-row md:gap-x-4">
-
-                <div class="mb-5 md:flex-1 min-w-0">
-                <x-dropdown-interno
-                        :facultades="$facultades"
-                        prompt="Selecciona una carrera"
-                        field_name="carrera"></x-dropdown-interno>
-                    </div>
-                <div class="mb-5 md:flex-1 min-w-0">
-                    <x-dropdown-interno
-                        :facultades="$facultades"
-                        prompt="Selecciona un departamento"
-                        field_name="departamento"
-                        elements="departamentos"></x-dropdown-interno>
-                </div>
-            </div>
-            <div class="mb-5">
-                <label for="email" class="block mb-2 text-lg font-medium text-white ">Correo Electrónico:</label>
-                <input type="email" id="email" tabindex="0"
-                    class="bg-gray-50 border-2 border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5"
-                    placeholder="tu_email@ejemplo.com" required />
-            </div>
-            <div class="mb-5">
-                <label for="tel" class="block mb-2 text-lg font-medium text-white ">Nro. Telefónico:</label>
-                <input type="tel" id="tel" tabindex="0"
-                    class="bg-gray-50 border-2 border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5"
-                    required inputmode="numeric" maxlength="12"/>
-            </div>
-            <div class="mb-5">
-                <label for="cud" class="block mb-2 text-lg font-medium text-white ">CUD:</label>
-                <input type="number" id="cud" tabindex="0"
-                    class="bg-gray-50 border-2 border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5"
-                    required inputmode="numeric" maxlength="10"/>
-            </div>
-            <div class="mb-5">
-                <label for="apoyo" class="block mb-2 text-lg font-medium text-white ">Apoyo (opcional):</label>
-                <textarea id="apoyo" tabindex="0"
-                    class="bg-gray-50 border-2 border-gray-400 font-source-code-pro text-gray-900 text-sm rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5"
-                    maxlength="4000" rows="5"></textarea>
-            </div>
-            <div class="mb-5">
-                <label for="situacion" class="block mb-2 text-lg font-medium text-white ">Situación (opcional):</label>
-                <textarea id="situacion" tabindex="0"
-                class="bg-gray-50 border-2 border-gray-400 font-source-code-pro text-gray-900 text-sm rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5"
-                maxlength="4000" rows="5"></textarea>
-            </div>
-            <div class="mb-5">
-                <label for="descripcion" class="block mb-2 text-lg font-medium text-white ">Descripción (opcional):</label>
-                <textarea id="descripcion" tabindex="0"
-                    class="bg-gray-50 border-2 border-gray-400 font-source-code-pro text-gray-900 text-sm rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5"
-                    maxlength="4000" rows="5"></textarea>
-            </div>
-            <div class="mb-5 flex justify-center">
-                <button type="submit" tabindex="0"
-                    class="text-white bg-coral hover:bg-coral-oscuro focus:ring-4 focus:outline-none focus:ring-blue-900 font-medium rounded-lg text-md w-5/6 sm:w-auto px-5 py-2.5 text-center">Inscribir alumno</button>
-            </div>  
-        </form>
+<body class="w-screen h-screen bg-verde-azulado font-roboto print:text-sm print:bg-white print:text-black">
+    <div role="region" aria-labelledby="Cap1" tabindex="0" class="w-5/6 lg:w-4/5 mx-auto flex flex-col pt-8 md:pt-12 print:m-0">
+        <table id="registros">
+            <caption id="Cap1" class="text-lg pl-2 md:pl-0 md:ml-4 text-left md:text-center font-medium text-white print:text-black bg-azul-oscuro print:bg-transparent md:bg-transparent font-bold md:font-normal">Alumnos solicitantes de apoyo</caption>
+            <tr class="hidden md:table-row print:border-b-2">
+                <th class="py-1 pl-2 pr-4 align-text-bottom text-left bg-azul-oscuro print:bg-transparent text-white print:text-black font-bold">Apellido y Nombre</th>
+                <th class="py-1 pl-2 pr-4 align-text-bottom text-left md:text-right bg-azul-oscuro print:bg-transparent text-white print:text-black font-bold">CUD</th>
+                <th class="py-1 pl-2 pr-4 align-text-bottom text-left bg-azul-oscuro print:bg-transparent text-white print:text-black font-bold">Email</th>
+                <th class="py-1 pl-2 pr-4 align-text-bottom text-left md:text-right bg-azul-oscuro print:bg-transparent text-white print:text-black font-bold">Teléfono</th>
+                <th class="py-1 pl-2 pr-4 align-text-bottom text-left md:text-right bg-azul-oscuro print:bg-transparent text-white print:text-black font-bold">Fecha Solicitud</th>
+                <th class="py-1 pl-2 pr-4 align-text-bottom text-left md:text-right bg-azul-oscuro print:bg-transparent text-white print:text-black font-bold">Última Modificación</th>
+                <th class="py-1 pl-2 pr-4 align-text-bottom text-left bg-azul-oscuro print:bg-transparent text-white print:text-black font-bold">Ficha Académica</th>
+            </tr>
+            <tr class="print:!bg-transparent even:bg-azul-marino odd:bg-azul-marino-alterno print:border-b-1">
+                <td class="py-1 pl-2 pr-4 align-text-bottom md:align-text-top text-left text-white print:text-black grid grid-cols-[8em_auto] gap-y-[1em] gap-x-[0.5em] md:block md:table-cell before:font-bold before:content-['Apellido_y_Nombre:_'] before:inline md:before:hidden print:bg-transparent">Gomez Pepe</td>
+                <td class="py-1 pl-2 pr-4 align-text-bottom md:align-text-top text-left md:text-right text-white print:text-black grid grid-cols-[8em_auto] gap-y-[1em] gap-x-[0.5em] md:block md:table-cell before:font-bold before:content-['CUD:_'] before:inline md:before:hidden print:bg-transparent">1111111111</td>
+                <td class="py-1 pl-2 pr-4 align-text-bottom md:align-text-top text-left text-white print:text-black grid grid-cols-[8em_auto] gap-y-[1em] gap-x-[0.5em] md:block md:table-cell before:font-bold before:content-['Email:_'] before:inline md:before:hidden print:bg-transparent">pepegomez2222@unsl.dev</td>
+                <td class="py-1 pl-2 pr-4 align-text-bottom md:align-text-top text-left md:text-right text-white print:text-black grid grid-cols-[8em_auto] gap-y-[1em] gap-x-[0.5em] md:block md:table-cell before:font-bold before:content-['Teléfono:_'] before:inline md:before:hidden print:bg-transparent">2664000000</td>
+                <td class="py-1 pl-2 pr-4 align-text-bottom md:align-text-top text-right before:text-left md:before:text-inherit text-white print:text-black grid grid-cols-[8em_auto] gap-y-[1em] gap-x-[0.5em] md:block md:table-cell before:font-bold before:content-['Fecha_Solicitud:_'] before:inline md:before:hidden print:bg-transparent">01/01/1900</td>
+                <td class="py-1 pl-2 pr-4 align-text-bottom md:align-text-top text-right before:text-left md:before:text-inherit text-white print:text-black grid grid-cols-[8em_auto] gap-y-[1em] gap-x-[0.5em] md:block md:table-cell before:font-bold before:content-['Última_Modificación:_'] before:inline md:before:hidden print:bg-transparent">01/01/1900</td>
+                <td class="py-1 pl-2 pr-4 align-text-bottom md:align-text-top text-left md:text-center text-white print:text-black grid grid-cols-[8em_auto] gap-y-[1em] gap-x-[0.5em] md:block md:table-cell before:font-bold before:content-['Ficha_Académica:_'] before:inline md:before:hidden print:bg-transparent"><a href="#" class="underline text-yellow-300 print:text-black hover:text-yellow-600">solicitud</a></td>
+            </tr>
+            <tr class="print:!bg-transparent even:bg-azul-marino odd:bg-azul-marino-alterno print:border-b-1">
+                <td class="py-1 pl-2 pr-4 align-text-bottom md:align-text-top text-left text-white print:text-black grid grid-cols-[8em_auto] gap-y-[1em] gap-x-[0.5em] md:block md:table-cell before:font-bold before:content-['Apellido_y_Nombre:_'] before:inline md:before:hidden print:bg-transparent">Gomez Pepe</td>
+                <td class="py-1 pl-2 pr-4 align-text-bottom md:align-text-top text-left md:text-right text-white print:text-black grid grid-cols-[8em_auto] gap-y-[1em] gap-x-[0.5em] md:block md:table-cell before:font-bold before:content-['CUD:_'] before:inline md:before:hidden print:bg-transparent">1111111111</td>
+                <td class="py-1 pl-2 pr-4 align-text-bottom md:align-text-top text-left text-white print:text-black grid grid-cols-[8em_auto] gap-y-[1em] gap-x-[0.5em] md:block md:table-cell before:font-bold before:content-['Email:_'] before:inline md:before:hidden print:bg-transparent">pepegomez2222@unsl.dev</td>
+                <td class="py-1 pl-2 pr-4 align-text-bottom md:align-text-top text-left md:text-right text-white print:text-black grid grid-cols-[8em_auto] gap-y-[1em] gap-x-[0.5em] md:block md:table-cell before:font-bold before:content-['Teléfono:_'] before:inline md:before:hidden print:bg-transparent">2664000000</td>
+                <td class="py-1 pl-2 pr-4 align-text-bottom md:align-text-top text-right before:text-left md:before:text-inherit text-white print:text-black grid grid-cols-[8em_auto] gap-y-[1em] gap-x-[0.5em] md:block md:table-cell before:font-bold before:content-['Fecha_Solicitud:_'] before:inline md:before:hidden print:bg-transparent">01/01/1900</td>
+                <td class="py-1 pl-2 pr-4 align-text-bottom md:align-text-top text-right before:text-left md:before:text-inherit text-white print:text-black grid grid-cols-[8em_auto] gap-y-[1em] gap-x-[0.5em] md:block md:table-cell before:font-bold before:content-['Última_Modificación:_'] before:inline md:before:hidden print:bg-transparent">01/01/1900</td>
+                <td class="py-1 pl-2 pr-4 align-text-bottom md:align-text-top text-left md:text-center text-white print:text-black grid grid-cols-[8em_auto] gap-y-[1em] gap-x-[0.5em] md:block md:table-cell before:font-bold before:content-['Ficha_Académica:_'] before:inline md:before:hidden print:bg-transparent"><a href="#" class="underline text-yellow-300 print:text-black hover:text-yellow-600">solicitud</a></td>
+            </tr>
+            <tr class="print:!bg-transparent even:bg-azul-marino odd:bg-azul-marino-alterno print:border-b-1">
+                <td class="py-1 pl-2 pr-4 align-text-bottom md:align-text-top text-left text-white print:text-black grid grid-cols-[8em_auto] gap-y-[1em] gap-x-[0.5em] md:block md:table-cell before:font-bold before:content-['Apellido_y_Nombre:_'] before:inline md:before:hidden print:bg-transparent">Gomez Pepe</td>
+                <td class="py-1 pl-2 pr-4 align-text-bottom md:align-text-top text-left md:text-right text-white print:text-black grid grid-cols-[8em_auto] gap-y-[1em] gap-x-[0.5em] md:block md:table-cell before:font-bold before:content-['CUD:_'] before:inline md:before:hidden print:bg-transparent">1111111111</td>
+                <td class="py-1 pl-2 pr-4 align-text-bottom md:align-text-top text-left text-white print:text-black grid grid-cols-[8em_auto] gap-y-[1em] gap-x-[0.5em] md:block md:table-cell before:font-bold before:content-['Email:_'] before:inline md:before:hidden print:bg-transparent">pepegomez2222@unsl.dev</td>
+                <td class="py-1 pl-2 pr-4 align-text-bottom md:align-text-top text-left md:text-right text-white print:text-black grid grid-cols-[8em_auto] gap-y-[1em] gap-x-[0.5em] md:block md:table-cell before:font-bold before:content-['Teléfono:_'] before:inline md:before:hidden print:bg-transparent">2664000000</td>
+                <td class="py-1 pl-2 pr-4 align-text-bottom md:align-text-top text-right before:text-left md:before:text-inherit text-white print:text-black grid grid-cols-[8em_auto] gap-y-[1em] gap-x-[0.5em] md:block md:table-cell before:font-bold before:content-['Fecha_Solicitud:_'] before:inline md:before:hidden print:bg-transparent">01/01/1900</td>
+                <td class="py-1 pl-2 pr-4 align-text-bottom md:align-text-top text-right before:text-left md:before:text-inherit text-white print:text-black grid grid-cols-[8em_auto] gap-y-[1em] gap-x-[0.5em] md:block md:table-cell before:font-bold before:content-['Última_Modificación:_'] before:inline md:before:hidden print:bg-transparent">01/01/1900</td>
+                <td class="py-1 pl-2 pr-4 align-text-bottom md:align-text-top text-left md:text-center text-white print:text-black grid grid-cols-[8em_auto] gap-y-[1em] gap-x-[0.5em] md:block md:table-cell before:font-bold before:content-['Ficha_Académica:_'] before:inline md:before:hidden print:bg-transparent"><a href="#" class="underline text-yellow-300 print:text-black hover:text-yellow-600">solicitud</a></td>
+            </tr>
+            <tr class="print:!bg-transparent even:bg-azul-marino odd:bg-azul-marino-alterno print:border-b-1">
+                <td class="py-1 pl-2 pr-4 align-text-bottom md:align-text-top text-left text-white print:text-black grid grid-cols-[8em_auto] gap-y-[1em] gap-x-[0.5em] md:block md:table-cell before:font-bold before:content-['Apellido_y_Nombre:_'] before:inline md:before:hidden print:bg-transparent">Gomez Pepe</td>
+                <td class="py-1 pl-2 pr-4 align-text-bottom md:align-text-top text-left md:text-right text-white print:text-black grid grid-cols-[8em_auto] gap-y-[1em] gap-x-[0.5em] md:block md:table-cell before:font-bold before:content-['CUD:_'] before:inline md:before:hidden print:bg-transparent">1111111111</td>
+                <td class="py-1 pl-2 pr-4 align-text-bottom md:align-text-top text-left text-white print:text-black grid grid-cols-[8em_auto] gap-y-[1em] gap-x-[0.5em] md:block md:table-cell before:font-bold before:content-['Email:_'] before:inline md:before:hidden print:bg-transparent">pepegomez2222@unsl.dev</td>
+                <td class="py-1 pl-2 pr-4 align-text-bottom md:align-text-top text-left md:text-right text-white print:text-black grid grid-cols-[8em_auto] gap-y-[1em] gap-x-[0.5em] md:block md:table-cell before:font-bold before:content-['Teléfono:_'] before:inline md:before:hidden print:bg-transparent">2664000000</td>
+                <td class="py-1 pl-2 pr-4 align-text-bottom md:align-text-top text-right before:text-left md:before:text-inherit text-white print:text-black grid grid-cols-[8em_auto] gap-y-[1em] gap-x-[0.5em] md:block md:table-cell before:font-bold before:content-['Fecha_Solicitud:_'] before:inline md:before:hidden print:bg-transparent">01/01/1900</td>
+                <td class="py-1 pl-2 pr-4 align-text-bottom md:align-text-top text-right before:text-left md:before:text-inherit text-white print:text-black grid grid-cols-[8em_auto] gap-y-[1em] gap-x-[0.5em] md:block md:table-cell before:font-bold before:content-['Última_Modificación:_'] before:inline md:before:hidden print:bg-transparent">01/01/1900</td>
+                <td class="py-1 pl-2 pr-4 align-text-bottom md:align-text-top text-left md:text-center text-white print:text-black grid grid-cols-[8em_auto] gap-y-[1em] gap-x-[0.5em] md:block md:table-cell before:font-bold before:content-['Ficha_Académica:_'] before:inline md:before:hidden print:bg-transparent"><a href="#" class="underline text-yellow-300 print:text-black hover:text-yellow-600">solicitud</a></td>
+            </tr>
+            <tr class="print:!bg-transparent even:bg-azul-marino odd:bg-azul-marino-alterno print:border-b-1">
+                <td class="py-1 pl-2 pr-4 align-text-bottom md:align-text-top text-left text-white print:text-black grid grid-cols-[8em_auto] gap-y-[1em] gap-x-[0.5em] md:block md:table-cell before:font-bold before:content-['Apellido_y_Nombre:_'] before:inline md:before:hidden print:bg-transparent">Gomez Pepe</td>
+                <td class="py-1 pl-2 pr-4 align-text-bottom md:align-text-top text-left md:text-right text-white print:text-black grid grid-cols-[8em_auto] gap-y-[1em] gap-x-[0.5em] md:block md:table-cell before:font-bold before:content-['CUD:_'] before:inline md:before:hidden print:bg-transparent">1111111111</td>
+                <td class="py-1 pl-2 pr-4 align-text-bottom md:align-text-top text-left text-white print:text-black grid grid-cols-[8em_auto] gap-y-[1em] gap-x-[0.5em] md:block md:table-cell before:font-bold before:content-['Email:_'] before:inline md:before:hidden print:bg-transparent">pepegomez2222@unsl.dev</td>
+                <td class="py-1 pl-2 pr-4 align-text-bottom md:align-text-top text-left md:text-right text-white print:text-black grid grid-cols-[8em_auto] gap-y-[1em] gap-x-[0.5em] md:block md:table-cell before:font-bold before:content-['Teléfono:_'] before:inline md:before:hidden print:bg-transparent">2664000000</td>
+                <td class="py-1 pl-2 pr-4 align-text-bottom md:align-text-top text-right before:text-left md:before:text-inherit text-white print:text-black grid grid-cols-[8em_auto] gap-y-[1em] gap-x-[0.5em] md:block md:table-cell before:font-bold before:content-['Fecha_Solicitud:_'] before:inline md:before:hidden print:bg-transparent">01/01/1900</td>
+                <td class="py-1 pl-2 pr-4 align-text-bottom md:align-text-top text-right before:text-left md:before:text-inherit text-white print:text-black grid grid-cols-[8em_auto] gap-y-[1em] gap-x-[0.5em] md:block md:table-cell before:font-bold before:content-['Última_Modificación:_'] before:inline md:before:hidden print:bg-transparent">01/01/1900</td>
+                <td class="py-1 pl-2 pr-4 align-text-bottom md:align-text-top text-left md:text-center text-white print:text-black grid grid-cols-[8em_auto] gap-y-[1em] gap-x-[0.5em] md:block md:table-cell before:font-bold before:content-['Ficha_Académica:_'] before:inline md:before:hidden print:bg-transparent"><a href="#" class="underline text-yellow-300 print:text-black hover:text-yellow-600">solicitud</a></td>
+            </tr>
+            <tr class="print:!bg-transparent even:bg-azul-marino odd:bg-azul-marino-alterno print:border-b-1">
+                <td class="py-1 pl-2 pr-4 align-text-bottom md:align-text-top text-left text-white print:text-black grid grid-cols-[8em_auto] gap-y-[1em] gap-x-[0.5em] md:block md:table-cell before:font-bold before:content-['Apellido_y_Nombre:_'] before:inline md:before:hidden print:bg-transparent">Gomez Pepe</td>
+                <td class="py-1 pl-2 pr-4 align-text-bottom md:align-text-top text-left md:text-right text-white print:text-black grid grid-cols-[8em_auto] gap-y-[1em] gap-x-[0.5em] md:block md:table-cell before:font-bold before:content-['CUD:_'] before:inline md:before:hidden print:bg-transparent">1111111111</td>
+                <td class="py-1 pl-2 pr-4 align-text-bottom md:align-text-top text-left text-white print:text-black grid grid-cols-[8em_auto] gap-y-[1em] gap-x-[0.5em] md:block md:table-cell before:font-bold before:content-['Email:_'] before:inline md:before:hidden print:bg-transparent">pepegomez2222@unsl.dev</td>
+                <td class="py-1 pl-2 pr-4 align-text-bottom md:align-text-top text-left md:text-right text-white print:text-black grid grid-cols-[8em_auto] gap-y-[1em] gap-x-[0.5em] md:block md:table-cell before:font-bold before:content-['Teléfono:_'] before:inline md:before:hidden print:bg-transparent">2664000000</td>
+                <td class="py-1 pl-2 pr-4 align-text-bottom md:align-text-top text-right before:text-left md:before:text-inherit text-white print:text-black grid grid-cols-[8em_auto] gap-y-[1em] gap-x-[0.5em] md:block md:table-cell before:font-bold before:content-['Fecha_Solicitud:_'] before:inline md:before:hidden print:bg-transparent">01/01/1900</td>
+                <td class="py-1 pl-2 pr-4 align-text-bottom md:align-text-top text-right before:text-left md:before:text-inherit text-white print:text-black grid grid-cols-[8em_auto] gap-y-[1em] gap-x-[0.5em] md:block md:table-cell before:font-bold before:content-['Última_Modificación:_'] before:inline md:before:hidden print:bg-transparent">01/01/1900</td>
+                <td class="py-1 pl-2 pr-4 align-text-bottom md:align-text-top text-left md:text-center text-white print:text-black grid grid-cols-[8em_auto] gap-y-[1em] gap-x-[0.5em] md:block md:table-cell before:font-bold before:content-['Ficha_Académica:_'] before:inline md:before:hidden print:bg-transparent"><a href="#" class="underline text-yellow-300 print:text-black hover:text-yellow-600">solicitud</a></td>
+            </tr>
+        </table>
     </div>
 </body>
-
 </html>

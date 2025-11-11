@@ -89,13 +89,14 @@
             class="absolute left-0 w-full rounded-lg shadow-sm mt-2 z-10 origin-top-left bg-white outline-none border border-gray-200">
             <!-- Opciones -->
             @foreach ($facultades as $facultad)
+                <!-- Muchos elementos visuales no se muestran en WHCM (contornos, fondos, íconos, etc)-->
                 <li role="option" 
                     data-index="{{ $loop->index }}"
                     data-value="{{ $facultad->codigo }}"
                     data-name="{{ $facultad->nombre }}"
                     x-on:click.prevent="selectOption($el.dataset.value, $el.dataset.name)"
                     class="p-2.5 w-full flex items-center rounded-md transition-colors text-left text-gray-800 hover:bg-blue-100 focus-visible:bg-blue-100 disabled:opacity-50 disabled:cursor-not-allowed border-b border-gray-200"
-                    :class="$el.dataset.index == focused_index ? 'ring-3 ring-blue-700' : ''">
+                    :class="$el.dataset.index == focused_index ? 'outline-none ring-3 ring-blue-700 forced-colors:ring-current' : ''"> 
                     <span
                         class="w-16 text-center bg-blue-900 text-white text-xs font-bold me-2    py-0.5 rounded-sm">{{ $facultad->codigo }}</span>{{ $facultad->nombre }}
                 </li>
