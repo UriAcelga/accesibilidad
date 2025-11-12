@@ -18,21 +18,21 @@
                 <legend for="rol" class="block text-lg font-medium text-white ">Tipo de Usuario:</label>
                     <div class="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-8">
                         <div class="has-[:focus]:outline-2 has-[:focus]:outline-dotted">
-                            <label for="becario"><input type="radio" id="becario" tabindex="0" name="rol"
+                            <label for="usuario"><input type="radio" id="usuario" tabindex="0" name="rol"
                                     class="bg-gray-50" maxlength="30" checked required /><span
-                                    class="ml-2 text-white">Becario</span></label>
+                                    class="ml-2 text-white">Usuario</span></label>
                         </div>
                         <div class="has-[:focus]:outline-2 has-[:focus]:outline-dotted">
 
-                            <label for="admin"><input type="radio" id="admin" tabindex="0" name="rol"
+                            <label for="ETA"><input type="radio" id="ETA" tabindex="0" name="rol"
                                     class="bg-gray-50 border-2" maxlength="30" /><span
-                                    class="ml-2 text-white">Administrador</span></label>
+                                    class="ml-2 text-white">ETA</span></label>
                         </div>
                     </div>
             </fieldset>
             <div class="mb-5">
-                <label for="usuario" class="block mb-2 text-lg font-medium text-white ">Usuario:</label>
-                <input type="text" id="usuario" tabindex="0"
+                <label for="nombre" class="block mb-2 text-lg font-medium text-white ">Nombre de usuario:</label>
+                <input type="text" id="nombre" tabindex="0"
                     class="bg-gray-50 border-2 border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5"
                     placeholder="Nombre de usuario" maxlength="40" required />
             </div>
@@ -48,7 +48,7 @@
                     <span class="shadow-2xl">Iniciar Sesión</span></button>
             </div>
         </form>
-        <div id="registro" class="w-full md:w-3/5 mx-auto">
+        <div id="registro" class="hidden w-full md:w-3/5 mx-auto">
             <div class="mb-5 flex flex-row justify-between">
                 <div class="w-2/5 h-px bg-white my-4"></div>
                 <span class="text-lg text-white">o</span>

@@ -13,8 +13,9 @@ class AuthController extends Controller
     }
     
     public function register(Request $request) {
+        return redirect()->route('inicio');
         $validacion = $request->validate([
-            'rol' => 'required|in:becario,admin',
+            'rol' => 'required|in:usuario,ETA',
             'name' => 'string|required|max:255|unique:users',
             'password' => 'string|required|min:8|max:72',
             'confirmpwd' => 'string|required|min:8|same:password'
