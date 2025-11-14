@@ -11,11 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('registros', function(Blueprint $tabla) {
-            $tabla->foreignId('departamento_id')
-            ->constrained()
-            ->onUpdate('cascade')
-            ->onDelete('cascade');
+        Schema::table('users', function(Blueprint $tabla) {
+            $tabla->boolean('is_admin');
         });
     }
 
@@ -24,8 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('registros', function(Blueprint $tabla) {
-            $tabla->dropColumn('departamento_id');
+        Schema::table('users', function(Blueprint $tabla) {
+            $tabla->dropColumn('is_admin');
         });
     }
 };

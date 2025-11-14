@@ -14,31 +14,38 @@
         <img src="{{ asset('logoBlanco.png') }}" class="w-full md:w-2/5 mx-auto" alt="logo">
         <form method="POST" action="{{ route('login')}}" class="w-full md:w-3/5 mx-auto">
             @csrf
+            @if ($errors->any())
+                @foreach ($errors->all() as $error)
+                    <div class="bg-red-200 flex flex-row space-x-2 outline-red-800 outline-1 items-center">
+                        <img src="{{ asset('icons/warning.svg')}}" class="w-8" ><span class="text-red-800">{{ $error }}</span>
+                    </div>
+                @endforeach
+            @endif
             <fieldset class="mb-5">
                 <legend for="rol" class="block text-lg font-medium text-white ">Tipo de Usuario:</label>
                     <div class="flex flex-col md:flex-row space-y-3 md:space-y-0 md:space-x-8">
                         <div class="has-[:focus]:outline-2 has-[:focus]:outline-dotted">
-                            <label for="usuario"><input type="radio" id="usuario" tabindex="0" name="rol"
+                            <label for="usuario"><input type="radio" value="usuario" tabindex="0" name="rol"
                                     class="bg-gray-50" maxlength="30" checked required /><span
                                     class="ml-2 text-white">Usuario</span></label>
                         </div>
                         <div class="has-[:focus]:outline-2 has-[:focus]:outline-dotted">
 
-                            <label for="ETA"><input type="radio" id="ETA" tabindex="0" name="rol"
+                            <label for="ETA"><input type="radio" value="ETA" tabindex="0" name="rol"
                                     class="bg-gray-50 border-2" maxlength="30" /><span
                                     class="ml-2 text-white">ETA</span></label>
                         </div>
                     </div>
             </fieldset>
             <div class="mb-5">
-                <label for="nombre" class="block mb-2 text-lg font-medium text-white ">Nombre de usuario:</label>
-                <input type="text" id="nombre" tabindex="0"
+                <label for="name" class="block mb-2 text-lg font-medium text-white ">Nombre de usuario:</label>
+                <input type="text" name="name" tabindex="0"
                     class="bg-gray-50 border-2 border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5"
                     placeholder="Nombre de usuario" maxlength="40" required />
             </div>
             <div class="mb-5">
-                <label for="pwd" class="block mb-2 text-lg font-medium text-white ">Contraseña:</label>
-                <input type="password" id="pwd" tabindex="0"
+                <label for="password" class="block mb-2 text-lg font-medium text-white ">Contraseña:</label>
+                <input type="password" name="password" tabindex="0"
                     class="bg-gray-50 border-2 border-gray-400 text-gray-900 text-sm rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5"
                     placeholder="Tu contraseña" maxlength="30" required />
             </div>
