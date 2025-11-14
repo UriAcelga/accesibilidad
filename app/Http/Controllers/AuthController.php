@@ -16,7 +16,7 @@ class AuthController extends Controller
             return redirect()->back()->withErrors(["rateLimit" => $mensaje]);
         }
         AuthService::IncrementarIntentos($request);
-        dd(AuthService::IntentosRestantes($request));
+        dd(AuthService::IntentosRestantes($request), AuthService::TiempoRestanteSeg($request));
 
         $request->validate([
             'rol' => 'required|in:usuario,ETA',
@@ -43,6 +43,12 @@ class AuthController extends Controller
             'password' => 'string|required|min:8|max:72',
             'confirmpwd' => 'string|required|min:8|same:password'
         ]);
+
+        $userdata = [
+            'name' => $request->input('name'),
+            'password' => $request->input('password'),
+            'is_admin' => $request->input('rol') == 'ETA'
+        ];
 
         $user = User::create($validacion);
 

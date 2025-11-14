@@ -11,7 +11,7 @@ class AuthService {
     }
 
     public static function IncrementarIntentos(Request $request) {
-        RateLimiter::hit('enviar-formulario:' . $request->ip());
+        RateLimiter::hit('enviar-formulario:' . $request->ip(), 180);
     }
 
     public static function TiempoRestanteSeg(Request $request) {
