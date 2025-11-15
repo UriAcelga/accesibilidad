@@ -16,7 +16,6 @@ class AuthController extends Controller
             return redirect()->back()->withErrors(["rateLimit" => $mensaje]);
         }
         AuthService::IncrementarIntentos($request);
-        dd(AuthService::IntentosRestantes($request), AuthService::TiempoRestanteSeg($request));
 
         $request->validate([
             'rol' => 'required|in:usuario,ETA',
@@ -29,14 +28,20 @@ class AuthController extends Controller
             'password' => $request->input('password'),
             'is_admin' => $request->input('rol') == 'ETA'
         ];
-        dd(Auth::attempt($userdata));
-        
 
-        return redirect()->route('home');
+        if(Auth::attempt($userdata)) {
+            $request->session()->regenerate();
+            return redirect()->route('home');
+        };
+        
+        return redirect()->back()->withErrors([
+            'usuario' => 'Credenciales de usuario inválidas.'
+        ]);
+
     }
     
     public function register(Request $request) {
-        return redirect()->route('inicio');
+        return redirect()->route('login');
         $validacion = $request->validate([
             'rol' => 'required|in:usuario,ETA',
             'name' => 'string|required|max:255|unique:users',
@@ -57,8 +62,12 @@ class AuthController extends Controller
         return redirect()->route('home');
     }
 
-    public function logout() {
+    public function logout(Request $request) {
+        Auth::logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
 
+        return redirect()->route('login');
     }
 
 }

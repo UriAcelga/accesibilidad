@@ -11,14 +11,7 @@
 </head>
 
 <body class="w-screen h-screen bg-verde-azulado">
-    <div class="w-full bg-white">
-        <!-- ajustar los 3 elementos izq - centro - der -->
-        <nav class="flex flex-col md:flex-row justify-between border-b-2 border-coral items-center">
-            <img src="{{asset('logo.png')}}" class="w-1/5" alt="logo">
-            <h2 class="font-bold text-center text-3xl text-coral w-full ">Solicitud de acompañamiento</h2>
-            <span class="font-bold text-center text-3xl text-coral w-full">Lucía</span>
-        </nav>
-    </div>
+    <x-app-navbar titulo="Solicitud de acompañamiento"></x-app-navbar>
     <div class=" lg-w-40% mx-auto mt-8">
         <form class="w-2/3 mx-auto">
         @csrf
@@ -94,10 +87,17 @@
             </div>
             <div class="mb-5 flex justify-center">
                 <button type="submit" tabindex="0"
-                    class="text-white bg-coral hover:bg-coral-oscuro focus:ring-4 focus:outline-none focus:ring-blue-900 font-medium rounded-lg text-md w-5/6 sm:w-auto px-5 py-2.5 text-center">Inscribir alumno</button>
+                    class="text-white bg-coral hover:bg-coral-oscuro focus:ring-4 focus:outline-none focus:ring-blue-900 font-medium rounded-lg text-md w-5/6 sm:w-auto px-5 py-4 md:py-2.5 text-center">Inscribir alumno</button>
             </div>  
         </form>
     </div>
+    <footer class="bg-azul-oscuro h-48 text-center">
+        <div class="flex flex-col h-full justify-center">
+            <span class="text-azul-vibrante text-md">Programa Universidad y Discapacidad</span>
+            <span class="text-azul-vibrante text-sm">Universidad Nacional de San Luis</span>
+            <span class="text-azul-vibrante text-sm">Copyright &copy 2025 Todos los Derechos Reservados</span>
+        </div>
+    </footer>
 </body>
 
 </html>

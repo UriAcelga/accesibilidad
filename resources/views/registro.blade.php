@@ -69,7 +69,7 @@
             </div>
             <span></span>
             <div class="w-full flex justify-center">
-                <a href="{{ route('inicio') }}" tabindex="0"
+                <a href="{{ route('login') }}" tabindex="0"
                     class="w-4/5 md:w-3/5 text-coral text-lg font-bold bg-white outline-2 outline-coral hover:bg-coral hover:text-white focus:bg-coral focus:text-white focus:ring-4 focus:outline-none focus:ring-blue-900 rounded-lg px-5 py-2.5 text-center inline-block transition duration-150 ease-in-out">
                     <span class="shadow-2xl">Iniciar Sesión</span>
                 </a>

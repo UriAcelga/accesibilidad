@@ -37,6 +37,6 @@ class HomeController extends Controller
     }
 
     public function registro() {
-        return redirect()->route('inicio');
+        return redirect()->route('login');
     }
 }
