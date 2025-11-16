@@ -1,7 +1,7 @@
 @props(['texto' => 'Usuario', 'texto_hover' => 'Cerrar Sesión', 'route' => route('logout')])
 
 <a href="{{ route('logout') }}" tabindex="0"
-    class="w-48 h-full md:order-3 flex items-center justify-end hover:bg-coral focus:bg-coral text-coral hover:text-white focus:text-white transition duration-300 ease-in-out"
+    class="order-2 md:order-3 w-48 h-28 md:h-full whitespace-nowrap flex items-center justify-end hover:bg-coral focus:bg-coral text-coral hover:text-white focus:text-white transition duration-300 ease-in-out"
     x-data="{
         es_hover: false,
         activar_hover() {
