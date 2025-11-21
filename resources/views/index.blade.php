@@ -9,7 +9,7 @@
     <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.15.0/dist/cdn.min.js"></script>
 </head>
 <body class="w-screen h-screen bg-verde-azulado print:text-sm print:bg-white print:text-black">
-    <x-app-navbar titulo="Lista de solicitantes"></x-app-navbar>
+    <x-app-navbar :titulos="['Estudiantes', 'Solicitudes']" :titulosHrefUrl="[ route('home'),route('solicitud')]" selected="Estudiantes"></x-app-navbar>
     <div role="region" aria-labelledby="Cap1" tabindex="0" class="w-5/6 lg:w-4/5 mx-auto flex flex-col pt-8 md:pt-12 print:m-0 font-roboto ">
         <table id="registros">
             <caption id="Cap1" class="text-lg pl-2 md:pl-0 md:ml-4 text-left md:text-center font-medium text-white print:text-black bg-azul-oscuro print:bg-transparent md:bg-transparent font-bold md:font-normal">Alumnos solicitantes de apoyo</caption>

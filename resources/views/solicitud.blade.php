@@ -11,9 +11,10 @@
 </head>
 
 <body class="w-screen h-screen bg-verde-azulado">
-    <x-app-navbar titulo="Solicitud de acompañamiento"></x-app-navbar>
+    <x-app-navbar :titulos="['Estudiantes', 'Solicitudes']" :titulosHrefUrl="[ route('home'),route('solicitud')]" selected="Solicitudes"></x-app-navbar>
+
     <div class=" lg-w-40% mx-auto mt-8">
-        <form class="w-2/3 mx-auto">
+        <form method="POST" action="#" class="w-2/3 mx-auto">
         @csrf
             <div class="mb-5">
                 <label for="apellido" class="block mb-2 text-lg font-medium text-white ">Apellido:</label>

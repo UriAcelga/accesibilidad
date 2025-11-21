@@ -11,7 +11,7 @@
 </head>
 
 <body class="w-screen h-screen bg-verde-azulado text-white text-lg">
-    <x-app-navbar titulo="<< Volver a solicitudes" tituloHrefUrl="{{ route('home') }}"></x-app-navbar>
+    <x-app-navbar :titulos="['<< Volver a estudiantes']" :titulosHrefUrl="[route('home')]" selected="<< Volver a estudiantes"></x-app-navbar>
     <div class="h-full md:h-5/6 flex justify-center flex-col-reverse md:flex-row">
         <section class="w-full md:w-1/2 my-10 md:my-0 flex items-center md:mx-2">
             <div x-data="{ activeTab: 'actualizar' }"
@@ -99,7 +99,7 @@
                     </g>
                 </svg>
             </div>
-            <div class="w-2/5 h-1/3 mx-auto my-8 hover:bg-white focus:bg-white hover:text-verde-azulado focus:text-verde-azulado border border-white flex flex-col items-center justify-center text-center"
+            <div class="hidden w-2/5 h-1/3 mx-auto my-8 hover:bg-white focus:bg-white hover:text-verde-azulado focus:text-verde-azulado border border-white flex flex-col items-center justify-center text-center"
                 tabindex="0">
                 <span class="text-xl font-bold my-2">Abrir en otra pestaña</span>
                 <svg fill="currentColor" class="w-10" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">

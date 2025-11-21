@@ -12,4 +12,16 @@ class SeguimientoController extends Controller
     public function index(){
         return view('seguimiento');
     }
+
+    public function actualizar() {
+        
+    }
+
+    public function cerrar() {
+
+    }
+
+    public function descargar() {
+
+    }
 }
