@@ -121,6 +121,7 @@
     x-on:keydown.stop="navigate($event)" x-id="['dropdown-panel']" class="relative w-full">
         <!-- Hidden Input: Dispatch manda datos en el evento para que otros componentes lo reconozcan -->
         <input type="hidden"
+            required
             name="{{ $field_name }}"
             x-bind:value="input_value">
         <!-- Boton -->

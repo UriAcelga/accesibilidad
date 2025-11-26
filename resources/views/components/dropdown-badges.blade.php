@@ -60,6 +60,7 @@
         >
         <!-- Hidden Input -->
         <input type="hidden"
+            required
             name="{{ $field_name }}"
             x-bind:value="input_value"
             >

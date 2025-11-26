@@ -50,12 +50,12 @@ class AuthController extends Controller
         ]);
 
         $userdata = [
-            'name' => $request->input('name'),
-            'password' => $request->input('password'),
-            'is_admin' => $request->input('rol') == 'ETA'
+            'name' => $validacion['name'],
+            'password' => $validacion['password'],
+            'is_admin' => $validacion['rol'] == 'ETA'
         ];
 
-        $user = User::create($validacion);
+        $user = User::create($userdata);
 
         Auth::login($user);
         

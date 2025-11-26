@@ -7,6 +7,30 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Estudiante extends Model
 {
+    protected $table = 'registros';
+    protected $fillable = [
+        'apellido',
+        'nombre',
+        'email',
+        'telefono',
+        'cud',
+        'ficha_academica',
+        'departamento_id',
+        'carrera_id',
+        'facultad_codigo'
+    ];
+
+    protected $hidden = [
+        'ficha_academica'
+    ];
+
+    protected function casts(): array
+    {
+        return [
+            'ficha_academica' => 'hashed',
+        ];
+    }
+
     public function facultad(): BelongsTo
     {
         return $this->belongsTo(Facultad::class);
