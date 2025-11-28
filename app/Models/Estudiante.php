@@ -27,7 +27,7 @@ class Estudiante extends Model
     protected function casts(): array
     {
         return [
-            'ficha_academica' => 'hashed',
+            'ficha_academica' => 'encrypted',
         ];
     }
 

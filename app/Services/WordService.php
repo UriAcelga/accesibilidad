@@ -49,15 +49,17 @@ class WordService {
         
         $apellidos = explode(' ', strtolower($apellido));
         $nombres = explode(' ', strtolower($nombre));
-
-        $ruta = Storage::disk('local')->path('seguimientos') . '/';
+        
+        $archivo = '';
         foreach($apellidos as $a) {
-            $ruta = $ruta . $a . '_';
+            $archivo = $archivo . $a . '_';
         }
         foreach($nombres as $n) {
-            $ruta = $ruta . $n . '_';
+            $archivo = $archivo . $n . '_';
         }
-        $ruta = $ruta . $cud . '_' . date("Y-m-d_H-i-s") . '.docx';
+        $archivo = $archivo . $cud . '_' . date("Y-m-d_H-i-s") . '.docx';
+        $ruta = Storage::disk('local')->path('seguimientos') . '/' . $archivo;
+        
 
         
         /**
@@ -151,7 +153,7 @@ class WordService {
         
         $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($this->phpWord, 'Word2007');
         $objWriter->save($ruta);
-        return $ruta;
+        return $archivo;
     }
 
     /**

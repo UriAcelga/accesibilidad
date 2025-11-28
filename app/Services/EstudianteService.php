@@ -116,4 +116,8 @@ class EstudianteService{
             ->paginate(20)
             ->appends(request()->query());
     }
+
+    public function getFichaById($id) {
+        return Estudiante::find($id)?->ficha_academica;
+    }
 }

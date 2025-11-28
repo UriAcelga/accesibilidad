@@ -16,6 +16,9 @@ Route::middleware(['auth', 'prevent-back'])->group(function() {
 Route::middleware(['auth'])->group(function() {
     Route::get('/solicitud', [HomeController::class, 'solicitudes'])->name('solicitud');
     Route::post('/solicitud', [EstudianteController::class, 'crear'])->name('solicitud');
+    Route::post('/seguimiento/actualizar/{id}', [SeguimientoController::class, 'actualizar'])->name('actualizar');
+    Route::post('/seguimiento/cerrar/{id}', [SeguimientoController::class, 'cerrar'])->name('cerrar');
+    Route::get('/seguimiento/descargar/{id}', [SeguimientoController::class, 'descargar'])->name('descargar');
 });
 
 Route::get('/login', [HomeController::class, 'login'])->name('login');

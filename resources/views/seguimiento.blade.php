@@ -44,12 +44,12 @@
                                 actualización.</span>
                         </div>
                         <div class="w-5/6 my-4 mx-auto">
-                            <form action="#" method="post">
+                            <form action="{{route('actualizar', $id)}}" method="post">
                                 @csrf
                                 <label for="asunto">Asunto:</label>
                                 <textarea name="asunto" tabindex="0"
                                     class="resize-none bg-gray-50 border-2 border-gray-400 font-source-code-pro text-gray-900 text-sm rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5"
-                                    maxlength="4000" rows="5"></textarea>
+                                    maxlength="4000" rows="5" required></textarea>
                                 <div class="my-5 flex justify-center">
                                     <button type="submit" tabindex="0"
                                         class="text-white bg-coral hover:bg-coral-oscuro focus:ring-4 focus:outline-none focus:ring-blue-900 font-medium rounded-lg text-md w-5/6 sm:w-auto px-5 py-4 md:py-2.5 text-center">
@@ -66,12 +66,12 @@
                                 por este medio.</span>
                         </div>
                         <div class="w-5/6 my-4 mx-auto">
-                            <form action="#" method="post">
+                            <form action="{{route('cerrar', $id)}}" method="post">
                                 @csrf
                                 <label for="causa" class="">Causa de cierre:</label>
                                 <textarea name="causa" tabindex="0"
                                     class="resize-none bg-gray-50 border-2 border-gray-400 font-source-code-pro text-gray-900 text-sm rounded-lg focus:ring-blue-900 focus:border-blue-900 block w-full p-2.5"
-                                    maxlength="4000" rows="5"></textarea>
+                                    maxlength="4000" rows="5" required></textarea>
                                 <div class="my-5 flex justify-center">
                                     <button type="submit" tabindex="0"
                                         class="text-white bg-coral hover:bg-coral-oscuro focus:ring-4 focus:outline-none focus:ring-blue-900 font-medium rounded-lg text-md w-5/6 sm:w-auto px-5 py-4 md:py-2.5 text-center">
@@ -86,7 +86,7 @@
             </div>
         </section>
         <section class="w-full md:w-1/2 my-10 md:my-0 flex flex-col items-center justify-center">
-            <div class="w-2/5 h-1/3 mx-auto my-8 border hover:bg-white focus:bg-white hover:text-verde-azulado focus:text-verde-azulado border-white flex flex-col items-center justify-center text-center"
+            <a href="{{route('descargar', $id)}}" class="w-2/5 h-1/3 mx-auto my-8 border hover:bg-white focus:bg-white hover:text-verde-azulado focus:text-verde-azulado border-white flex flex-col items-center justify-center text-center"
                 tabindex="0">
                 <span class="text-xl font-bold my-2">Descargar Ficha</span>
                 <svg viewBox="0 0 24 24" fill="currentColor" class="w-10" xmlns="http://www.w3.org/2000/svg">
@@ -98,19 +98,7 @@
                         </path>
                     </g>
                 </svg>
-            </div>
-            <div class="hidden w-2/5 h-1/3 mx-auto my-8 hover:bg-white focus:bg-white hover:text-verde-azulado focus:text-verde-azulado border border-white flex flex-col items-center justify-center text-center"
-                tabindex="0">
-                <span class="text-xl font-bold my-2">Abrir en otra pestaña</span>
-                <svg fill="currentColor" class="w-10" viewBox="0 0 16 16" xmlns="http://www.w3.org/2000/svg">
-                    <g id="SVGRepo_bgCarrier" stroke-width="0"></g>
-                    <g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g>
-                    <g id="SVGRepo_iconCarrier">
-                        <path d="M14 3.5L8.5 9 7 7.5 12.5 2H10V0h6v6h-2V3.5zM6 0v2H2v12h12v-4h2v6H0V0h6z"
-                            fill-rule="evenodd"></path>
-                    </g>
-                </svg>
-            </div>
+            </a>
         </section>
     </div>
     <x-footer></x-footer>
