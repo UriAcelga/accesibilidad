@@ -1,4 +1,7 @@
-@props(['facultades', 'prompt', 'field_name'])
+@props(['facultades', 'prompt', 'field_name', 'label' => null])
+@php
+    $label = $label ?? $field_name;
+@endphp
 <div class="flex justify-center">
     <div x-data="{
         open: false,
@@ -65,7 +68,7 @@
             x-bind:value="input_value"
             >
         <!-- Boton -->
-        <span class="block mb-2 text-lg font-medium text-white">{{ucfirst($field_name)}}:</span>
+        <span class="block mb-2 text-lg font-medium text-white">{{ucfirst($label)}}:</span>
         <button type="button" tabindex=0 
             x-ref="button"
             x-on:click="toggle()" 

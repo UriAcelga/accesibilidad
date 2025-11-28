@@ -24,6 +24,7 @@ class HomeController extends Controller
         } else {
             $registrosEstudiante = $this->estudianteService->fetchTableColsForGuest($request);
         }
+        
         $registrosFacultad = $this->facultadService->fetch();
         /*
         $sort = request('sort');

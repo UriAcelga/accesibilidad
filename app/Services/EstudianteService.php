@@ -16,7 +16,7 @@ class EstudianteService{
         return Estudiante::with('facultad', 'carrera', 'departamento')->get();
     }
 
-    public function fetchTableCols(Request $request): Collection {
+    public function fetchTableCols(Request $request){
         return QueryBuilder::for(Estudiante::class, $request)
             ->allowedFields([
                 'id',
@@ -69,7 +69,7 @@ class EstudianteService{
             
     }
     /* Sin información de contacto (teléfono e email) */
-    public function fetchTableColsForGuest(Request $request): Collection {
+    public function fetchTableColsForGuest(Request $request) {
         return QueryBuilder::for(Estudiante::class, $request)
             ->allowedFields([
                 'id',

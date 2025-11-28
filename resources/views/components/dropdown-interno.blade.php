@@ -1,8 +1,12 @@
 @props(['facultades',
     'prompt' => 'Selecciona una carrera', 
     'field_name' => 'carrera',
-    'elements' => 'carreras'
+    'elements' => 'carreras',
+    'label' => null
 ])
+@php
+    $label = $label ?? $field_name;
+@endphp
 <div class="flex justify-center">
     <div x-data="{
         open: false,
@@ -125,7 +129,7 @@
             name="{{ $field_name }}"
             x-bind:value="input_value">
         <!-- Boton -->
-        <span class="block mb-2 text-lg font-medium text-white">{{ucfirst($field_name)}}:</span>
+        <span class="block mb-2 text-lg font-medium text-white">{{ucfirst($label)}}:</span>
         <button type="button" tabindex=0 
             x-ref="button"
             x-on:click="toggle()" 
