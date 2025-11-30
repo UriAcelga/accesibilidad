@@ -14,8 +14,10 @@ class SeguimientoController extends Controller
 
     public function index($id)
     {
+        $serviceEstudiante = new EstudianteService();
+        $estudiante = $serviceEstudiante->getDataSeguimientoById($id);
         return view('seguimiento', [
-            'id' => $id
+            'estudiante' => $estudiante,
         ]);
     }
 
@@ -35,8 +37,13 @@ class SeguimientoController extends Controller
         $serviceEstudiante = new EstudianteService();
         $ficha = $serviceEstudiante->getFichaById($id);
         $phpword = new WordService();
-        $phpword->actualizarFicha($ficha, $validacion['asunto'], Auth::user()->name);
-        return redirect()->back()->with(['estado' => 'exitoActualizar']);
+        $ruta = storage_path('app/private/seguimientos/' . $ficha);
+        if (file_exists($ruta)) {
+            $phpword->actualizarFicha($ruta, $validacion['asunto'], Auth::user()->name);
+            return redirect()->back()->with(['estado' => 'exitoActualizar']);
+        } else {
+            return redirect()->back()->withErrors(['no_encontrada' => 'Error al encontrar la ficha de seguimiento del estudiante.']);
+        }
     }
 
     public function cerrar(Request $request, $id)
@@ -55,16 +62,20 @@ class SeguimientoController extends Controller
         $serviceEstudiante = new EstudianteService();
         $ficha = $serviceEstudiante->getFichaById($id);
         $phpword = new WordService();
-        $phpword->cerrarFicha($ficha, $validacion['causa']);
-        return redirect()->back()->with(['estado' => 'exitoCerrar']);
+        $ruta = storage_path('app/private/seguimientos/' . $ficha);
+        if (file_exists($ruta)) {
+            $phpword->cerrarFicha($ruta, $validacion['causa']);
+            return redirect()->back()->with(['exitoCerrar' => 'La ficha de seguimiento se ha cerrado correctamente y no podrá actualizarse.']);
+        } else {
+            return redirect()->back()->withErrors(['no_encontrada' => 'Error al encontrar la ficha de seguimiento del estudiante.']);
+        }
     }
 
     public function descargar($id)
     {
         $serviceEstudiante = new EstudianteService();
         $ficha = $serviceEstudiante->getFichaById($id);
-        $ruta = 'private/' . $ficha;
-        dd($ficha, $ruta);
+        $ruta = 'seguimientos/' . $ficha;
         if (Storage::disk('local')->exists($ruta)) {
             return Storage::download($ruta);
         }

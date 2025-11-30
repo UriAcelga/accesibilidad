@@ -44,7 +44,7 @@
                                 actualización.</span>
                         </div>
                         <div class="w-5/6 my-4 mx-auto">
-                            <form action="{{route('actualizar', $id)}}" method="post">
+                            <form action="{{route('actualizar', $estudiante->id)}}" method="post">
                                 @csrf
                                 <label for="asunto">Asunto:</label>
                                 <textarea name="asunto" tabindex="0"
@@ -66,7 +66,7 @@
                                 por este medio.</span>
                         </div>
                         <div class="w-5/6 my-4 mx-auto">
-                            <form action="{{route('cerrar', $id)}}" method="post">
+                            <form action="{{route('cerrar', $estudiante->id)}}" method="post">
                                 @csrf
                                 <label for="causa" class="">Causa de cierre:</label>
                                 <textarea name="causa" tabindex="0"
@@ -86,7 +86,13 @@
             </div>
         </section>
         <section class="w-full md:w-1/2 my-10 md:my-0 flex flex-col items-center justify-center">
-            <a href="{{route('descargar', $id)}}" class="w-2/5 h-1/3 mx-auto my-8 border hover:bg-white focus:bg-white hover:text-verde-azulado focus:text-verde-azulado border-white flex flex-col items-center justify-center text-center"
+            <div class="w-full flex flex-col text-center">
+                <span class="text-3xl font-bold">{{$estudiante->apellido . ' ' . $estudiante->nombre}}</span>
+                <span class="text-xl">{{$estudiante->cud}}</span>
+                <span class="text-lg">{{$estudiante->carrera->nombre}}</span>
+                <span class="text-lg">{{$estudiante->facultad_codigo}}</span>
+            </div>
+            <a href="{{route('descargar', $estudiante->id)}}" class="w-2/5 h-1/3 mx-auto my-8 hover:bg-white focus:bg-white hover:text-verde-azulado focus:text-verde-azulado outline-dotted outline-white-2 flex flex-col items-center justify-center text-center"
                 tabindex="0">
                 <span class="text-xl font-bold my-2">Descargar Ficha</span>
                 <svg viewBox="0 0 24 24" fill="currentColor" class="w-10" xmlns="http://www.w3.org/2000/svg">

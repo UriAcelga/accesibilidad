@@ -72,7 +72,6 @@ class EstudianteService{
     public function fetchTableColsForGuest(Request $request) {
         return QueryBuilder::for(Estudiante::class, $request)
             ->allowedFields([
-                'id',
                 'apellido',
                 'nombre',
                 'cud',
@@ -119,5 +118,10 @@ class EstudianteService{
 
     public function getFichaById($id) {
         return Estudiante::find($id)?->ficha_academica;
+    }
+
+    public function getDataSeguimientoById($id) {
+        return Estudiante::with('carrera:id,nombre')
+        ->find($id, ['id', 'apellido', 'nombre', 'cud', 'facultad_codigo', 'carrera_id']);
     }
 }
