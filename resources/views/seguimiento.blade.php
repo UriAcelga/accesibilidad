@@ -38,10 +38,34 @@
                     <div class="w-full h-full" id="actualizar" role="tabpanel" aria-labelledby="actualizar-tab"
                         x-show="activeTab === 'actualizar'">
                         <div class="h-1/4 w-full border-b border-white text-center">
-                            <span>NOTA: Efectuar el cambio realizará una actualización a la ficha del estudiante.
-                                Quedará
-                                registrado tanto el nombre del usuario de personal como la fecha de la
-                                actualización.</span>
+                            @if (session('exitoActualizar'))
+                                <span class="w-full bg-blue-200 flex flex-row justify-center items-center text-center text-blue-900">
+                                    <svg class="w-8 h-8 mr-2" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M512 64a448 448 0 1 1 0 896 448 448 0 0 1 0-896zm-55.808 536.384-99.52-99.584a38.4 38.4 0 1 0-54.336 54.336l126.72 126.72a38.272 38.272 0 0 0 54.336 0l262.4-262.464a38.4 38.4 0 1 0-54.272-54.336L456.192 600.384z"/></svg>
+                                    La ficha de {{$estudiante->nombre}} ha sido actualizada correctamente.
+                                </span> 
+                            @elseif (session('exitoCerrar'))
+                                <span class="w-full bg-blue-200 flex flex-row justify-center items-center text-center text-blue-900">
+                                    <svg class="w-8 h-8 mr-2" viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M512 64a448 448 0 1 1 0 896 448 448 0 0 1 0-896zm-55.808 536.384-99.52-99.584a38.4 38.4 0 1 0-54.336 54.336l126.72 126.72a38.272 38.272 0 0 0 54.336 0l262.4-262.464a38.4 38.4 0 1 0-54.272-54.336L456.192 600.384z"/></svg>
+                                    La ficha de {{$estudiante->nombre}} ha sido cerrada.
+                                </span> 
+
+                            @elseif ($errors->any())
+                                <div class="w-full h-full bg-red-200 flex flex-col justify-center items-center text-center text-red-800">
+                                @foreach ($errors->all() as $error)
+                                    <span class="w-full flex flex-row justify-center items-center">
+                                        <img src="{{ asset('icons/warning.svg')}}" class="w-8" >
+                                        {{ $error }}
+                                    </span>
+                                @endforeach
+                                </div>
+                            @else 
+                                <span>NOTA: Efectuar el cambio realizará una actualización a la ficha del estudiante.
+                                    Quedará
+                                    registrado tanto el nombre del usuario de personal como la fecha de la
+                                    actualización.</span>
+                                
+                            @endif
+                            
                         </div>
                         <div class="w-5/6 my-4 mx-auto">
                             <form action="{{route('actualizar', $estudiante->id)}}" method="post">

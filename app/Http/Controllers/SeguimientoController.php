@@ -28,6 +28,7 @@ class SeguimientoController extends Controller
                 ->stripTags()
                 ->squish()
                 ->ucfirst()
+                ->finish('.')
                 ->toString() : '',
         ]);
 
@@ -35,14 +36,15 @@ class SeguimientoController extends Controller
             'asunto' => 'string|min:10|max:4000',
         ]);
         $serviceEstudiante = new EstudianteService();
-        $ficha = $serviceEstudiante->getFichaById($id);
+        $ficha = $serviceEstudiante->getFichaById($id) ?? 'error';
         $phpword = new WordService();
         $ruta = storage_path('app/private/seguimientos/' . $ficha);
-        if (file_exists($ruta)) {
-            $phpword->actualizarFicha($ruta, $validacion['asunto'], Auth::user()->name);
-            return redirect()->back()->with(['estado' => 'exitoActualizar']);
+        if (!file_exists($ruta)) {
+            return redirect()->back()->withErrors(['noEncontrada' => 'Error al encontrar la ficha de seguimiento del estudiante.']);
+        } else if($phpword->actualizarFicha($ruta, $validacion['asunto'], Auth::user()->name)) {
+            return redirect()->back()->withErrors(['fichaCerrada' => 'La ficha de seguimiento está cerrada y no puede actualizarse']);
         } else {
-            return redirect()->back()->withErrors(['no_encontrada' => 'Error al encontrar la ficha de seguimiento del estudiante.']);
+            return redirect()->back()->with(['exitoActualizar' => true]);
         }
     }
 
@@ -53,6 +55,7 @@ class SeguimientoController extends Controller
                 ->stripTags()
                 ->squish()
                 ->ucfirst()
+                ->finish('.')
                 ->toString() : '',
         ]);
 
@@ -63,11 +66,12 @@ class SeguimientoController extends Controller
         $ficha = $serviceEstudiante->getFichaById($id);
         $phpword = new WordService();
         $ruta = storage_path('app/private/seguimientos/' . $ficha);
-        if (file_exists($ruta)) {
-            $phpword->cerrarFicha($ruta, $validacion['causa']);
-            return redirect()->back()->with(['exitoCerrar' => 'La ficha de seguimiento se ha cerrado correctamente y no podrá actualizarse.']);
-        } else {
+        if (!file_exists($ruta)) {
             return redirect()->back()->withErrors(['no_encontrada' => 'Error al encontrar la ficha de seguimiento del estudiante.']);
+        } else if($phpword->cerrarFicha($ruta, $validacion['causa'])) {
+            return redirect()->back()->withErrors(['fichaCerrada' => 'La ficha de seguimiento ya estaba cerrada previamente']);
+        } else {
+            return redirect()->back()->with(['exitoCerrar' => true]);
         }
     }
 

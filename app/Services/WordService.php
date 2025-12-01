@@ -166,7 +166,6 @@ class WordService {
         }
         $section = $this->phpWord->getSection(0);
 
-
         $textRun = $section->addTextRun();
         $textRun->addText(
             'Fecha:',
@@ -196,11 +195,13 @@ class WordService {
             $this->fontstyle_text
         );
         $section->addTextBreak(3);
+        $objWriter = \PhpOffice\PhpWord\IOFactory::createWriter($this->phpWord, 'Word2007');
+        $objWriter->save($ruta);
         return true;
     }
 
     /**
-     * Última actualización al archivo. Retorna bool dependiendo si la ficha está cerrada.
+     * Última actualización al archivo. Retorna bool dependiendo si la ficha estaba cerrada previamente.
      */
     public function cerrarFicha(string $ruta, string $causa){
         $this->phpWord = \PhpOffice\PhpWord\IOFactory::load($ruta);

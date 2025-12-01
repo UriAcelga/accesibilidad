@@ -33,7 +33,7 @@
 
                             <label for="ETA"><input type="radio" value="ETA" tabindex="0" name="rol"
                                     class="bg-gray-50 border-2" maxlength="30" /><span
-                                    class="ml-2 text-white">ETA</span></label>
+                                    class="ml-2 text-white">ETAA</span></label>
                         </div>
                     </div>
             </fieldset>

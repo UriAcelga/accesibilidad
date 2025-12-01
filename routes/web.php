@@ -10,10 +10,10 @@ use Illuminate\Support\Facades\Route;
 Route::middleware(['auth', 'prevent-back'])->group(function() {
     Route::get('/', [HomeController::class, 'index'])->name('home');
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-    Route::get('/seguimiento/{id}', [SeguimientoController::class, 'index'])->name('seguimiento');
 });
 
 Route::middleware(['auth'])->group(function() {
+    Route::get('/seguimiento/{id}', [SeguimientoController::class, 'index'])->name('seguimiento');
     Route::get('/solicitud', [HomeController::class, 'solicitudes'])->name('solicitud');
     Route::post('/solicitud', [EstudianteController::class, 'crear'])->name('solicitud');
     Route::post('/seguimiento/actualizar/{id}', [SeguimientoController::class, 'actualizar'])->name('actualizar');
