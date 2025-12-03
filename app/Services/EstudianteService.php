@@ -40,8 +40,8 @@ class EstudianteService{
                 }),
 
                 //Filtros por dropdown para facultad y carrera (departamento ??)
-                AllowedFilter::exact('facultad.codigo'),
-                AllowedFilter::exact('carrera.id'),
+                AllowedFilter::exact('facultad_codigo'),
+                AllowedFilter::exact('carrera_id'),
 
                 //Rangos de fecha
                 AllowedFilter::callback('creado_antes_de', function ($query, $valor) {
@@ -59,7 +59,7 @@ class EstudianteService{
                 'cud',
                 'created_at',
                 'facultad_codigo',
-                'carrera.nombre'
+                'carrera_id'
             ])
             ->allowedIncludes(['facultad', 'carrera'])
             ->defaultSort('-created_at')

@@ -1,6 +1,6 @@
 @php
     $estilosThTexto =
-        'py-1 pl-2 pr-4 align-text-bottom text-left bg-azul-oscuro print:bg-transparent text-white print:text-black font-bold';
+        'w-full h-full bg-azul-oscuro print:bg-transparent text-white print:text-black font-bold';
     $estilosThNum =
         'py-1 pl-2 pr-4 align-text-bottom text-left md:text-right bg-azul-oscuro print:bg-transparent text-white print:text-black font-bold';
     $estilosTdTexto =
@@ -73,18 +73,30 @@
                 class="text-lg pl-2 md:pl-0 md:ml-4 text-left md:text-center font-medium text-white print:text-black bg-azul-oscuro print:bg-transparent md:bg-transparent font-bold md:font-normal">
                 Alumnos solicitantes de apoyo</caption>
             <tr class="hidden md:table-row print:border-b-2">
-                <th class="{{ $estilosThTexto }}">Apellido</th>
-                <th class="{{ $estilosThTexto }}">Nombre</th>
-                <th class="{{ $estilosThTexto }}">Facultad</th>
-                <th class="{{ $estilosThTexto }}">Carrera</th>
+                <x-table-header-sorter thstyles="{{ $estilosThTexto }}" :currentSort="request('sort')" sortby="apellido" field="Apellido">
+                </x-table-header-sorter>
+                <x-table-header-sorter thstyles="{{ $estilosThTexto }}" :currentSort="request('sort')" sortby="nombre" field="Nombre">
+                </x-table-header-sorter>
+                <x-table-header-sorter thstyles="{{ $estilosThTexto }}" :currentSort="request('sort')" sortby="facultad_codigo" field="Facultad">
+                </x-table-header-sorter>
+                <x-table-header-sorter thstyles="{{ $estilosThTexto }}" :currentSort="request('sort')" sortby="carrera_id" field="Carrera">
+                </x-table-header-sorter>
+
+                
+                
                 @if (auth()->user()?->is_admin)
-                    <th class="{{ $estilosThTexto }}">Email</th>
-                    <th class="{{ $estilosThNum }}">Teléfono</th>
+                    <x-table-header-sorter thstyles="{{ $estilosThTexto }}" :currentSort="request('sort')" sortby="email" field="Email">
+                    </x-table-header-sorter>
+                    <x-table-header-sorter thstyles="{{ $estilosThTexto }}" :currentSort="request('sort')" sortby="telefono" field="Nro. Telefónico">
+                    </x-table-header-sorter>
                 @endif
-                <th class="{{ $estilosThNum }}">CUD</th>
-                <th class="{{ $estilosThNum }}">Fecha Solicitud</th>
+                <x-table-header-sorter thstyles="{{ $estilosThTexto }}" :currentSort="request('sort')" sortby="cud" field="CUD">
+                </x-table-header-sorter>
+                <x-table-header-sorter thstyles="{{ $estilosThTexto }}" :currentSort="request('sort')" sortby="created_at" field="Fecha Solicitud">
+                </x-table-header-sorter>
                 @if (auth()->user()?->is_admin)
-                    <th colspan="2" class="{{ $estilosThTexto }}">Ficha Académica</th>
+                    <th colspan="2" class="{{ $estilosThTexto }}" scope="col" aria-sort="none">
+                        Ficha Académica</th>
                 @endif
             </tr>
             @foreach ($estudiantes as $estudiante)
@@ -137,10 +149,18 @@
                 @endif
             </tr>
         </table>
-        <span
-            class="w-full bg-azul-marino text-center text-white text-lg {{ $estudiantes->isEmpty() ? '' : 'hidden' }}">No
-            hay estudiantes
-            registrados con esos filtros.</span>
+        {{-- Mensaje si no hay registros --}}
+        @if ($estudiantes->isEmpty())
+            <span class="w-full bg-azul-marino text-center text-white text-lg">
+                No hay estudiantes registrados con esos filtros.</span>
+        @endif
+        {{-- Paginación --}}
+        @if ($estudiantes->hasPages())
+            <div class="bg-azul-oscuro w-full border-t border-white">
+                {{ $estudiantes->links() }}
+            </div>
+        @endif
+
     </div>
 </body>
 
