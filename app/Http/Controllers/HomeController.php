@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Estudiante;
 use App\Services\EstudianteService;
 use Illuminate\Http\Request;
 use App\Services\FacultadService;
+use Carbon\Carbon;
 use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
@@ -19,23 +21,16 @@ class HomeController extends Controller
     }
 
     public function index(Request $request) {
+        // if($request['fecha_hasta'] !== null) {
+        //     dd(Carbon::parse($request['fecha_hasta'])->endOfDay()->toDateTimeString());
+        // }
         if(Auth::user()->is_admin) {
             $registrosEstudiante = $this->estudianteService->fetchTableCols($request);
         } else {
             $registrosEstudiante = $this->estudianteService->fetchTableColsForGuest($request);
         }
-        
         $registrosFacultad = $this->facultadService->fetch();
-        /*
-        $sort = request('sort');
-        $ariaSort = 'none';
-        if($sort === 'field') {
-            $ariaSort = $sort[0] === '-' ? 'descending' : 'ascending';
-        }
 
-        dsp en th:
-        <th scope="col" aria-sort="{{ $ariaSort }}"> 
-        */
         return view('index', [
             'facultades' => $registrosFacultad,
             'estudiantes' => $registrosEstudiante,

@@ -2,6 +2,7 @@
 
 namespace App\Services;
 use App\Models\Estudiante;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
 use Spatie\QueryBuilder\QueryBuilder;
@@ -44,11 +45,13 @@ class EstudianteService{
                 AllowedFilter::exact('carrera_id'),
 
                 //Rangos de fecha
-                AllowedFilter::callback('creado_antes_de', function ($query, $valor) {
-                    $query->where('created_at', '<=', $valor);
+                AllowedFilter::callback('fecha_hasta', function ($query, $valor) {
+                    $fechaHastaStr = Carbon::parse($valor)->endOfDay()->toDateTimeString();
+                    $query->whereRaw('created_at <= ?', [$fechaHastaStr]);
                 }),
-                AllowedFilter::callback('creado_despues_de', function ($query, $valor) {
-                    $query->where('created_at', '>=', $valor);
+                AllowedFilter::callback('fecha_desde', function ($query, $valor) {
+                    $fechaDesdeStr = Carbon::parse($valor)->endOfDay()->toDateTimeString();
+                    $query->whereRaw('created_at >= ?', [$fechaDesdeStr]);
                 })
             ])
             ->allowedSorts([
@@ -94,11 +97,11 @@ class EstudianteService{
                 AllowedFilter::exact('carrera.id'),
 
                 //Rangos de fecha
-                AllowedFilter::callback('creado_antes_de', function ($query, $valor) {
-                    $query->where('created_at', '<=', $valor);
+                AllowedFilter::callback('fecha_hasta', function ($query, $valor) {
+                    $query->whereDate('created_at', '<=', $valor);
                 }),
-                AllowedFilter::callback('creado_despues_de', function ($query, $valor) {
-                    $query->where('created_at', '>=', $valor);
+                AllowedFilter::callback('fecha_desde', function ($query, $valor) {
+                    $query->whereDate('created_at', '>=', $valor);
                 })
             ])
             ->allowedSorts([

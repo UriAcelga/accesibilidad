@@ -1,6 +1,5 @@
 @php
-    $estilosThTexto =
-        'w-full h-full bg-azul-oscuro print:bg-transparent text-white print:text-black font-bold';
+    $estilosThTexto = 'w-full h-full bg-azul-oscuro print:bg-transparent text-white print:text-black font-bold';
     $estilosThNum =
         'py-1 pl-2 pr-4 align-text-bottom text-left md:text-right bg-azul-oscuro print:bg-transparent text-white print:text-black font-bold';
     $estilosTdTexto =
@@ -30,9 +29,17 @@
         class="w-5/6 lg:w-4/5 mx-auto flex mt-8 md:mt-12  print:m-0 font-roboto w-full border-2 rounded-lg border-azul-oscuro">
         <div class="h-full w-full flex flex-col">
             <span class="text-white w-full bg-azul-oscuro text-center text-lg">Filtros de búsqueda</span>
-            <form method="GET" class="p-4 bg-azul-marino-alterno flex space-x-4">
+            <form method="GET" class="p-4 bg-azul-marino-alterno flex space-x-4" x-data="{}"
+                @submit.prevent="
+                    $el.querySelectorAll('input').forEach(campo => {
+                        if(campo.value === '') {
+                            campo.disabled = true;
+                        }
+                    });
+                    $el.submit();
+            ">
                 <div>
-                    <label for="buscar" class="block mb-2 text-lg font-medium text-white">Buscar:</label>
+                    <label for="filter[buscar]" class="block mb-2 text-lg font-medium text-white">Buscar:</label>
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <svg class="h-5 w-5 text-gray-400" fill="currentColor" viewBox="0 0 20 20">
@@ -48,11 +55,19 @@
                 </div>
                 <div class="w-1/3">
                     <x-dropdown-badges :facultades="$facultades" prompt="Filtrar por Facultad"
-                        field_name="filter[facultad.codigo]" label="Facultad"></x-dropdown-badges>
+                        field_name="filter[facultad_codigo]" label="Facultad"></x-dropdown-badges>
                 </div>
                 <div class="w-1/3">
-                    <x-dropdown-interno :facultades="$facultades" prompt="Filtrar por Carrera" field_name="filter[carrera.id]"
+                    <x-dropdown-interno :facultades="$facultades" prompt="Filtrar por Carrera" field_name="filter[carrera_id]"
                         label="Carrera"></x-dropdown-interno>
+                </div>
+                <div class="w-1/3">
+                    <label for="filter[fecha_desde]" class="block mb-2 text-lg font-medium text-white">Desde:</label>
+                    <input type="date" name="filter[fecha_desde]" min="2025-01-01" max="{{ now()->format('Y-m-d') }}">
+                </div>
+                <div class="w-1/3">
+                    <label for="filter[fecha_hasta]" class="block mb-2 text-lg font-medium text-white">Hasta:</label>
+                    <input type="date" name="filter[fecha_hasta]" min="2025-01-01" max="{{ now()->format('Y-m-d') }}" >
                 </div>
                 <button type="submit"
                     class="px-4 py-2 h-12 bg-coral text-white rounded-md hover:bg-coral-oscuro focus:outline-none focus:ring-2 focus:ring-coral">
@@ -73,26 +88,34 @@
                 class="text-lg pl-2 md:pl-0 md:ml-4 text-left md:text-center font-medium text-white print:text-black bg-azul-oscuro print:bg-transparent md:bg-transparent font-bold md:font-normal">
                 Alumnos solicitantes de apoyo</caption>
             <tr class="hidden md:table-row print:border-b-2">
-                <x-table-header-sorter thstyles="{{ $estilosThTexto }}" :currentSort="request('sort')" sortby="apellido" field="Apellido">
+                <x-table-header-sorter thstyles="{{ $estilosThTexto }}" :currentSort="request('sort')" sortby="apellido"
+                    field="Apellido">
                 </x-table-header-sorter>
-                <x-table-header-sorter thstyles="{{ $estilosThTexto }}" :currentSort="request('sort')" sortby="nombre" field="Nombre">
+                <x-table-header-sorter thstyles="{{ $estilosThTexto }}" :currentSort="request('sort')" sortby="nombre"
+                    field="Nombre">
                 </x-table-header-sorter>
-                <x-table-header-sorter thstyles="{{ $estilosThTexto }}" :currentSort="request('sort')" sortby="facultad_codigo" field="Facultad">
+                <x-table-header-sorter thstyles="{{ $estilosThTexto }}" :currentSort="request('sort')" sortby="facultad_codigo"
+                    field="Facultad">
                 </x-table-header-sorter>
-                <x-table-header-sorter thstyles="{{ $estilosThTexto }}" :currentSort="request('sort')" sortby="carrera_id" field="Carrera">
+                <x-table-header-sorter thstyles="{{ $estilosThTexto }}" :currentSort="request('sort')" sortby="carrera_id"
+                    field="Carrera">
                 </x-table-header-sorter>
 
-                
-                
+
+
                 @if (auth()->user()?->is_admin)
-                    <x-table-header-sorter thstyles="{{ $estilosThTexto }}" :currentSort="request('sort')" sortby="email" field="Email">
+                    <x-table-header-sorter thstyles="{{ $estilosThTexto }}" :currentSort="request('sort')" sortby="email"
+                        field="Email">
                     </x-table-header-sorter>
-                    <x-table-header-sorter thstyles="{{ $estilosThTexto }}" :currentSort="request('sort')" sortby="telefono" field="Nro. Telefónico">
+                    <x-table-header-sorter thstyles="{{ $estilosThTexto }}" :currentSort="request('sort')" sortby="telefono"
+                        field="Nro. Telefónico">
                     </x-table-header-sorter>
                 @endif
-                <x-table-header-sorter thstyles="{{ $estilosThTexto }}" :currentSort="request('sort')" sortby="cud" field="CUD">
+                <x-table-header-sorter thstyles="{{ $estilosThTexto }}" :currentSort="request('sort')" sortby="cud"
+                    field="CUD">
                 </x-table-header-sorter>
-                <x-table-header-sorter thstyles="{{ $estilosThTexto }}" :currentSort="request('sort')" sortby="created_at" field="Fecha Solicitud">
+                <x-table-header-sorter thstyles="{{ $estilosThTexto }}" :currentSort="request('sort')" sortby="created_at"
+                    field="Fecha Solicitud">
                 </x-table-header-sorter>
                 @if (auth()->user()?->is_admin)
                     <th colspan="2" class="{{ $estilosThTexto }}" scope="col" aria-sort="none">
