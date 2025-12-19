@@ -12,7 +12,7 @@
 
 <body class="w-screen h-screen bg-verde-azulado text-white text-lg">
     <x-app-navbar :titulos="['<< Volver a estudiantes']" :titulosHrefUrl="[route('home')]" selected="<< Volver a estudiantes"></x-app-navbar>
-    <div class="h-full md:h-5/6 flex justify-center flex-col-reverse md:flex-row">
+    <div class="md:h-5/6 flex justify-center flex-col-reverse md:flex-row">
         <section class="w-full md:w-1/2 my-10 md:my-0 flex items-center md:mx-2">
             <div x-data="{ activeTab: 'actualizar' }"
                 class="w-full h-5/6 my-auto flex flex-col border border-white items-center justify-start">
