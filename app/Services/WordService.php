@@ -58,6 +58,13 @@ class WordService {
             $archivo = $archivo . $n . '_';
         }
         $archivo = $archivo . $cud . '_' . date("Y-m-d_H-i-s") . '.docx';
+
+
+        // Crear carpeta si no existe
+        if(!Storage::disk('local')->exists('seguimientos')) {
+            Storage::disk('local')->makeDirectory('seguimientos');
+        }
+
         $ruta = Storage::disk('local')->path('seguimientos') . '/' . $archivo;
         
 

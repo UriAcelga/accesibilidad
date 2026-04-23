@@ -42,9 +42,9 @@ class SeguimientoController extends Controller
         if (!file_exists($ruta)) {
             return redirect()->back()->withErrors(['noEncontrada' => 'Error al encontrar la ficha de seguimiento del estudiante.']);
         } else if($phpword->actualizarFicha($ruta, $validacion['asunto'], Auth::user()->name)) {
-            return redirect()->back()->withErrors(['fichaCerrada' => 'La ficha de seguimiento está cerrada y no puede actualizarse']);
-        } else {
             return redirect()->back()->with(['exitoActualizar' => true]);
+        } else {
+            return redirect()->back()->withErrors(['fichaCerrada' => 'La ficha de seguimiento está cerrada y no puede actualizarse']);
         }
     }
 
